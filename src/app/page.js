@@ -33,10 +33,10 @@ export default async function Home() {
             <NavBarComp/>
             <div className={""}>
                 <div className={"flex justify-center"}>
-                    <div className={"w-[1024px] p-5"}>
+                    <div className={"w-[1024px] p-5 mt-5"}>
                         <div
-                            className={"flex flex-row w-full bg-white bg-opacity-70 rounded-lg shadow-xl p-10"}>
-                            <div className={"mr-10"}>
+                            className={"flex flex-row w-full bg-white rounded-lg shadow-xl p-10"}>
+                            <div className={"mr-10 rounded-2xl overflow-hidden"}>
                                 <Image
                                     width={300}
                                     height={200}
@@ -51,8 +51,6 @@ export default async function Home() {
                                     <Button
                                         className={"mt-5"}
                                         color={"primary"}
-                                        auto
-                                        shadow
                                         as={Link}
                                         href={"/content"}
                                     >
@@ -63,12 +61,12 @@ export default async function Home() {
                         </div>
 
                         <div className={"flex flex-row w-full mt-10"}>
-                            <div className={"flex flex-col w-full bg-white bg-opacity-70 rounded-lg shadow-xl p-10"}>
+                            <div className={"flex flex-col w-full bg-white rounded-lg shadow-xl p-10"}>
                                 <h2 className={"text-2xl font-bold text-gray-950"}>课程简介</h2>
                                 <div className={"mt-5 text-gray-700"}>{courseInfo.courseDescription}</div>
                             </div>
                             <div className={"flex flex-col ml-7"}>
-                                <div className={"w-[300px] bg-white bg-opacity-70 rounded-lg shadow-xl p-5"}>
+                                <div className={"w-[300px] bg-white rounded-lg shadow-xl p-5"}>
                                     <h2 className={"text-xl font-bold text-gray-950 border-l-5 pl-2"}>课程信息</h2>
                                     <div className={"mt-5"}>
                                         <table>
@@ -113,13 +111,13 @@ export default async function Home() {
                                         </table>
                                     </div>
                                 </div>
-                                <div className={"w-[300px] bg-white bg-opacity-70 rounded-lg shadow-xl p-5 mt-5"}>
+                                <div className={"w-[300px] bg-white rounded-lg shadow-xl p-5 mt-5"}>
                                     <h2 className={"text-xl font-bold text-gray-950 border-l-5 pl-2"}>授课教师</h2>
                                     <div className={"mt-5"}>
                                         {
                                             teacherList.map((teacher) => {
                                                 return (
-                                                    <div className={"mt-1.5"}>
+                                                    <div className={"mt-1.5"} key={teacher.user_id}>
                                                         <User
                                                             name={teacher.name}
                                                             description={`${teacher.username} #${teacher.user_id}`}

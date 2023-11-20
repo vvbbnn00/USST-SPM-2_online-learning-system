@@ -20,14 +20,14 @@ export default async function NavBarComp({route}) {
                 <NavbarItem isActive={
                     currentRoute === "/"
                 }>
-                    <Link color="foreground" href="#">
+                    <Link color="foreground" href="/">
                         首页
                     </Link>
                 </NavbarItem>
                 <NavbarItem isActive={
                     currentRoute === "/content"
                 }>
-                    <Link href="#" aria-current="page">
+                    <Link href="/content" aria-current="page">
                         学习内容
                     </Link>
                 </NavbarItem>
