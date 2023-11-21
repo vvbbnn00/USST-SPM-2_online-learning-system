@@ -8,6 +8,7 @@ services:
       - KK_MEDIA=
       - KK_FILE_UPLOAD_ENABLED=true
       - WATERMARK_TXT=Online Learning System
+      - KK_CACHE_ENABLED=true
   openresty:
     build: kkfileview-nginx
     ports:
