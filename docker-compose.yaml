@@ -1,0 +1,18 @@
+version: '3'
+services:
+  kkfileview:
+    image: keking/kkfileview:4.1.0
+    environment:
+      - KK_OFFICE_PREVIEW_SWITCH_DISABLED=true
+      - KK_MEDIA_CONVERT_DISABLE=true
+      - KK_MEDIA=
+      - KK_FILE_UPLOAD_ENABLED=true
+      - WATERMARK_TXT=Online Learning System
+  openresty:
+    build: kkfileview-nginx
+    ports:
+      - "8012:8012"
+    volumes:
+      - ./logs/openresty:/usr/local/openresty/nginx/logs
+    depends_on:
+      - kkfileview
