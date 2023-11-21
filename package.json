@@ -20,6 +20,8 @@
     "preview-office-docs": "^1.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.5"
+    "react-h5-audio-player": "^3.9.0",
+    "tailwindcss": "3.3.5",
+    "video-react": "^0.16.0"
   }
 }
