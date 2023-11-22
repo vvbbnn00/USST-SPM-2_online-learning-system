@@ -2,10 +2,7 @@
 import React from "react";
 import NavBarComp from "@/component/layout/navbar";
 import {Button, Link, Tooltip} from "@nextui-org/react";
-import FileIconRounded from "@/component/layout/file-icon-rounded";
-import {IconEdit} from "@/component/icons/IconEdit";
-import FilePreview from "@/component/layout/preview/file-preview";
-import {parseSize} from "@/utils/string";
+import ContentForm from "@/app/content/[contentId]/edit/content-form";
 
 export default async function ContentsDetail({searchParams, params}) {
     const contentId = params.contentId;
@@ -30,58 +27,29 @@ export default async function ContentsDetail({searchParams, params}) {
                 <div className={"pt-10 pb-10"}>
 
                     <div className={"flex bg-white p-5 rounded-xl shadow-xl"}>
-                        <div className={"flex"}>
+                        <div className={"flex absolute"}>
                             <Button
                                 as={Link}
-                                href={`/content`}
+                                href={`/content/${contentId}`}
                                 variant={"faded"}
                             >
                                 &lt; 返回
                             </Button>
                         </div>
 
-                        <div className={"flex flex-1 justify-center"}>
+                        <div className={"flex flex-1 justify-center p-1.5"}>
                             <Tooltip content={"第一章 项目初始"}>
                                 <div className={"flex gap-2.5 items-center"}>
-                                    <FileIconRounded type={"pdf"}/>
-                                    <span className={"text-gray-950 font-bold text-xl"}>教学材料1</span>
+                                    <span className={"text-gray-950 font-bold text-xl"}>编辑 - 教学材料1</span>
                                 </div>
                             </Tooltip>
                         </div>
 
-                        <div className={"flex"}>
-                            <div className={"flex gap-2.5 items-center justify-end"}>
-                                <Button
-                                    as={Link}
-                                    href={`/content/${contentId}/edit`}
-                                    color={"default"}
-                                    startContent={<IconEdit fill={"#737373"}/>}
-                                >
-                                    编辑
-                                </Button>
-                            </div>
-                        </div>
                     </div>
 
                     <div className={"flex bg-white p-5 rounded-xl shadow-xl mt-5 flex-col gap-5 w-full"}>
-                        <FilePreview file={file}/>
                         <div className={"w-full justify-center flex"}>
-                            <div className={"justify-center flex pb-10 flex-col gap-1.5 w-full"}>
-                                <div className={"text-gray-500 text-sm text-center"}>
-                                    文件大小：{parseSize(file.size)}
-                                </div>
-                                <div className={"w-full flex justify-center"}>
-                                    <Button
-                                        color={"primary"}
-                                        size={"lg"}
-                                        className={"w-1/4"}
-                                        disabled={!file.canDownload}
-                                        variant={!file.canDownload ? "faded" : "solid"}
-                                    >
-                                        下载
-                                    </Button>
-                                </div>
-                            </div>
+                            <ContentForm />
                         </div>
                     </div>
 

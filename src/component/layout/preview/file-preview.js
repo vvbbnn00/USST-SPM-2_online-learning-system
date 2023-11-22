@@ -49,16 +49,5 @@ export default function FilePreview({file}) {
 
     return <div className={"flex w-full flex-col"}>
         {renderPreview(file)}
-        <div className={"justify-center w-full flex pb-10"}>
-            <Button
-                color={"primary"}
-                size={"lg"}
-                className={"w-1/4"}
-                disabled={!file.canDownload}
-                variant={!file.canDownload ? "faded" : "solid"}
-            >
-                下载
-            </Button>
-        </div>
     </div>
 }
