@@ -1,12 +1,12 @@
 "use client";
 
 import {useState} from "react";
-import PdfPreview from "@/component/layout/preview/sub-preview/pdf-preview";
-import OfficePreview from "@/component/layout/preview/sub-preview/office-preview";
-import ImagePreview from "@/component/layout/preview/sub-preview/image-preview";
-import VideoPreview from "@/component/layout/preview/sub-preview/video-preview";
-import AudioPreview from "@/component/layout/preview/sub-preview/audio-preview";
-import DefaultPreview from "@/component/layout/preview/sub-preview/default-preview";
+import PdfPreview from "@/components/layout/preview/sub-preview/pdf-preview";
+import OfficePreview from "@/components/layout/preview/sub-preview/office-preview";
+import ImagePreview from "@/components/layout/preview/sub-preview/image-preview";
+import VideoPreview from "@/components/layout/preview/sub-preview/video-preview";
+import AudioPreview from "@/components/layout/preview/sub-preview/audio-preview";
+import DefaultPreview from "@/components/layout/preview/sub-preview/default-preview";
 import {Button} from "@nextui-org/react";
 
 function renderPreview(file) {

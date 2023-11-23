@@ -1,7 +1,7 @@
 "use client";
 
 export default function PdfPreview({file}) {
-    const pdfPath = encodeURIComponent(file.url)
+    const pdfPath = encodeURIComponent(file.previewUrl)
     const url = `/pdf-js/web/viewer.html?file=${pdfPath}`
 
     return <div className={"flex w-full rounded-xl overflow-hidden mb-10"}>

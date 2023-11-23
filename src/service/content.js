@@ -77,8 +77,6 @@ export async function getContentDetail({contentId}) {
     const innerDownloadUrl = `${INNER_API_ENDPOINT}/api/upload/${file.fileId}/download/ols_upload_${file.fileId}.${file.fileType}`;
     const previewUrl = generatePreviewUrl(innerDownloadUrl, file.fileType) || downloadUrl;
 
-    // console.log(previewUrl);
-
     const ret = {
         contentId: content.content_id,
         contentName: content.name,

@@ -1,6 +1,6 @@
 "use client";
 
-import FileIconRounded from "@/component/layout/file-icon-rounded";
+import FileIconRounded from "@/components/layout/file-icon-rounded";
 import {parseSize} from "@/utils/string";
 
 export default function DefaultPreview({file}) {

@@ -1,7 +1,7 @@
 "use client";
-import {IconFilePdf} from "@/component/icons/file/IconFilePdf";
+import {IconFilePdf} from "@/components/icons/file/IconFilePdf";
 import {Button, Chip, Link, Progress, Tooltip} from "@nextui-org/react";
-import FileIconRounded from "@/component/layout/file-icon-rounded";
+import FileIconRounded from "@/components/layout/file-icon-rounded";
 
 const renderChip = (status) => {
     switch (status) {

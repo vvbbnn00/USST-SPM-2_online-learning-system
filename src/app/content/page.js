@@ -1,10 +1,10 @@
 "use server"
 import React from "react";
-import NavBarComp from "@/component/layout/navbar";
+import NavBarComp from "@/components/layout/navbar";
 import {Button, Image, Link, Tooltip, User} from "@nextui-org/react";
 import ContentList from "@/app/content/content-list";
 import {isTeacher} from "@/utils/auth";
-import {IconAdd} from "@/component/icons/IconAdd";
+import {IconAdd} from "@/components/icons/IconAdd";
 import {getContentList} from "@/service/content";
 
 export default async function Contents() {

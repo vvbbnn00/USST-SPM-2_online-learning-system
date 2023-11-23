@@ -1,7 +1,7 @@
 "use client";
 import {Button, Input, Select, SelectItem} from "@nextui-org/react";
 import React from "react";
-import FileUpload from "@/component/form/file-upload";
+import FileUpload from "@/components/form/file-upload";
 
 export default function ContentForm({content}) {
 

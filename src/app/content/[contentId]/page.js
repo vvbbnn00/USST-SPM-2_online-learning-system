@@ -1,10 +1,10 @@
 "use server"
 import React from "react";
-import NavBarComp from "@/component/layout/navbar";
+import NavBarComp from "@/components/layout/navbar";
 import {Button, Link, Tooltip} from "@nextui-org/react";
-import FileIconRounded from "@/component/layout/file-icon-rounded";
-import {IconEdit} from "@/component/icons/IconEdit";
-import FilePreview from "@/component/layout/preview/file-preview";
+import FileIconRounded from "@/components/layout/file-icon-rounded";
+import {IconEdit} from "@/components/icons/IconEdit";
+import FilePreview from "@/components/layout/preview/file-preview";
 import {parseSize} from "@/utils/string";
 import {getContentDetail} from "@/service/content";
 import {notFound} from "next/navigation";

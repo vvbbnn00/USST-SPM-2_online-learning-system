@@ -6,7 +6,7 @@ export default function ImagePreview({file}) {
 
     return <div className={"flex w-full justify-center mb-10"}>
         <Image
-            src={file.url}
+            src={file.previewUrl}
             alt={file.name}
             className={"w-full max-h-[768px]"}
         />

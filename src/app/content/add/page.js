@@ -1,6 +1,6 @@
 "use server"
 import React from "react";
-import NavBarComp from "@/component/layout/navbar";
+import NavBarComp from "@/components/layout/navbar";
 import {Button, Link} from "@nextui-org/react";
 import ContentForm from "@/app/content/[contentId]/edit/content-form";
 

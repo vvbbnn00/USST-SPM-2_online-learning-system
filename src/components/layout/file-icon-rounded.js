@@ -1,14 +1,14 @@
 "use client";
 
-import {IconFilePdf} from "@/component/icons/file/IconFilePdf";
-import {IconFilePpt} from "@/component/icons/file/IconFilePpt";
-import {IconFileWord} from "@/component/icons/file/IconFileWord";
-import {IconFileExcel} from "@/component/icons/file/IconFileExcel";
-import {IconFileVideo} from "@/component/icons/file/IconFileVideo";
-import {IconFileZip} from "@/component/icons/file/IconFileZip";
-import {IconFileImage} from "@/component/icons/file/IconFileImage";
-import {IconFileAudio} from "@/component/icons/file/IconFileAudio";
-import {IconFileFile} from "@/component/icons/file/IconFileFile";
+import {IconFilePdf} from "@/components/icons/file/IconFilePdf";
+import {IconFilePpt} from "@/components/icons/file/IconFilePpt";
+import {IconFileWord} from "@/components/icons/file/IconFileWord";
+import {IconFileExcel} from "@/components/icons/file/IconFileExcel";
+import {IconFileVideo} from "@/components/icons/file/IconFileVideo";
+import {IconFileZip} from "@/components/icons/file/IconFileZip";
+import {IconFileImage} from "@/components/icons/file/IconFileImage";
+import {IconFileAudio} from "@/components/icons/file/IconFileAudio";
+import {IconFileFile} from "@/components/icons/file/IconFileFile";
 
 function chooseBgIcon(type, size) {
     switch (type) {

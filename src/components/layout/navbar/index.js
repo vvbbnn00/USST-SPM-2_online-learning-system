@@ -2,7 +2,7 @@
 import {Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@nextui-org/react";
 import React from "react";
 import {isAdmin, isLogin} from "@/utils/auth";
-import {AdminNavBarItem} from "@/component/layout/navbar/admin-dropdown-items";
+import {AdminNavBarItem} from "@/components/layout/navbar/admin-dropdown-items";
 
 export default async function NavBarComp({route}) {
     const siteName = "项目管理与过程改进";

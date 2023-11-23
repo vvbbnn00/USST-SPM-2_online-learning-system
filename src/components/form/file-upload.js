@@ -1,7 +1,7 @@
 "use client"
 
 import {Button, Progress} from "@nextui-org/react";
-import FileIconRounded from "@/component/layout/file-icon-rounded";
+import FileIconRounded from "@/components/layout/file-icon-rounded";
 import React from "react";
 import {parseSize} from "@/utils/string";
 import {redirect} from "next/navigation";

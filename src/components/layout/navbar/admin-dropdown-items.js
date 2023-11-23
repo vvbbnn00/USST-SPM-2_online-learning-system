@@ -1,7 +1,7 @@
 "use client"
 
 import {Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, NavbarItem} from "@nextui-org/react";
-import {IconChevronDown} from "@/component/icons/IconChevronDown";
+import {IconChevronDown} from "@/components/icons/IconChevronDown";
 
 export function AdminNavBarItem({route}) {
     const currentRoute = route || "/";

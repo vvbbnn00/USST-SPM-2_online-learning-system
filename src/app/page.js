@@ -1,6 +1,6 @@
 "use server"
 import React from "react";
-import NavBarComp from "@/component/layout/navbar";
+import NavBarComp from "@/components/layout/navbar";
 import {Button, Image, Link, Tooltip, User} from "@nextui-org/react";
 
 export default async function Home() {

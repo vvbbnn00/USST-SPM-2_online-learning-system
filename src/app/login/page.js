@@ -3,7 +3,7 @@ import React from "react";
 import {Input} from "@nextui-org/react";
 import {session} from "@/utils/session";
 import {redirect} from "next/navigation";
-import NavBarComp from "@/component/layout/navbar";
+import NavBarComp from "@/components/layout/navbar";
 import {LoginSubmitButton} from "@/app/login/login-button";
 import doLogin from "@/app/login/actions";
 

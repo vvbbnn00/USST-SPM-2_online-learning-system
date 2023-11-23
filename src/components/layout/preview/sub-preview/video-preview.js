@@ -7,7 +7,7 @@ export default function VideoPreview({file}) {
 
     return <div className={"flex w-full rounded-xl overflow-hidden mb-10"}>
         <Player>
-            <source src={file.url} />
+            <source src={file.previewUrl} />
         </Player>
     </div>
 }

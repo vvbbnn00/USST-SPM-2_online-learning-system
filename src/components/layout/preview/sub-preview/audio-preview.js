@@ -10,7 +10,7 @@ export default function AudioPreview({file}) {
         <div className={"w-full p-10 flex justify-center pb-10"}>
             <AudioPlayer
                 autoPlay
-                src={file.url}
+                src={file.previewUrl}
                 onPlay={e => console.log("onPlay")}
                 ref={audioRef}
             />
