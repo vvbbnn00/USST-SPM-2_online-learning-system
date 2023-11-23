@@ -25,7 +25,7 @@ export async function hasRole(role) {
 export async function isLogin() {
     if (DEBUG) return true;
     const s = await session();
-    return await s.get('user_id');
+    return await s.get('userId');
 }
 
 /**
@@ -64,7 +64,7 @@ export async function getUserData() {
         roleList: ['admin', 'teacher', 'student']
     };
     const s = await session();
-    const userId = await s.get('user_id');
+    const userId = await s.get('userId');
     const username = await s.get('username');
     const roleList = await s.get('roleList');
 

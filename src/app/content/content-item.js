@@ -22,11 +22,11 @@ export function ContentItem({item}) {
     return <div
         className={"flex items-center gap-5 hover:bg-gray-100 w-full p-2.5 pl-5 pr-5 rounded-xl"}>
         <div className={"flex flex-1 items-center gap-5 justify-start"}>
-            <FileIconRounded type={item.type}/>
-            <Tooltip content={item.name}>
-                <Link href={`/content/${item.content_id}`}>
+            <FileIconRounded type={item.contentType}/>
+            <Tooltip content={item.contentName}>
+                <Link href={`/content/${item.contentId}`}>
                     <div className={"text-gray-700 text-lg line-clamp-1 break-all"}>
-                        {item.name}
+                        {item.contentName}
                     </div>
                 </Link>
             </Tooltip>
@@ -50,7 +50,7 @@ export function ContentItem({item}) {
             <div>
                 <Button
                     as={Link}
-                    href={`/content/${item.content_id}`}
+                    href={`/content/${item.contentId}`}
                     variant={"bordered"}
                     size={"sm"}
                 >

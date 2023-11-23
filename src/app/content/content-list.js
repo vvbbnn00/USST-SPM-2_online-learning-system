@@ -26,7 +26,7 @@ export default function ContentList({contentList}) {
                     <div>
                         <div className={"flex pt-2.5 pb-2.5 flex-col gap-2"}>
                             {chapterMap[chapter].map(item => {
-                                return <div key={item.content_id} className={"w-full"}>
+                                return <div key={item.contentId} className={"w-full"}>
                                     <ContentItem item={item}/>
                                 </div>
                             })}

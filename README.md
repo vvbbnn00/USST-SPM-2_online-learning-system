@@ -1,4 +1,4 @@
-# Online Learning System for SPM Course
+# Online Learning System for SPM Base
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

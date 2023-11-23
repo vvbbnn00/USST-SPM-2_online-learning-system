@@ -1,6 +1,6 @@
 "use client"
 
-import {Button, Input, Progress} from "@nextui-org/react";
+import {Button, Progress} from "@nextui-org/react";
 import FileIconRounded from "@/component/layout/file-icon-rounded";
 import React from "react";
 import {parseSize} from "@/utils/string";
@@ -9,7 +9,7 @@ import {redirect} from "next/navigation";
 export default function FileUpload({onUploaded, defaultFile}) {
 
     const fileUploadRef = React.useRef(null);
-    const [file, setFile] = React.useState(defaultFile);
+    const [file, setFile] = React.useState(defaultFile || null);
     const [fileExtension, setFileExtension] = React.useState(null);
     const [uploading, setUploading] = React.useState(false);
     const [uploadProgress, setUploadProgress] = React.useState(0);
@@ -122,7 +122,7 @@ export default function FileUpload({onUploaded, defaultFile}) {
 
     return <div>
         <div
-            className={"flex flex-col gap-3 p-5 pb-2.5 border-2 border-gray-50 rounded shadow hover:shadow-xl transition cursor-pointer"}
+            className={"flex flex-col gap-3 p-5 border-2 border-gray-50 rounded shadow hover:shadow-xl transition cursor-pointer"}
             ref={fileUploadRef}
             onDragOver={e => {
                 e.preventDefault();
@@ -165,7 +165,7 @@ export default function FileUpload({onUploaded, defaultFile}) {
                 uploadInput.click();
             }}
         >
-            <div className={"flex transition-all"}>
+            <div className={"flex transition-all items-center"}>
                 <div className={"flex select-none"}>
                     <FileIconRounded type={file ? fileExtension : "file"} size={48}/>
                 </div>
@@ -203,15 +203,15 @@ export default function FileUpload({onUploaded, defaultFile}) {
                 <Progress aria-label="Uploading..." value={uploadProgress} className="max-w-md" size="sm"/>
             }
         </div>
-        {error && <div
+        {error && (<div
             className={"bg-red-50 border border-red-200 text-red-500 p-2.5 rounded text-sm text-center mt-2.5"}
         >
             上传失败，错误原因：{error}
-        </div>}
-        {uploadSuccess && <div
+        </div>)}
+        {uploadSuccess && (<div
             className={"bg-green-50 border border-green-200 text-green-500 p-2.5 rounded text-sm text-center mt-2.5"}
         >
             上传成功
-        </div>}
+        </div>)}
     </div>
 }
