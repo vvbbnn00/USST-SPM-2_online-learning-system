@@ -57,7 +57,7 @@ export default async function NavBarComp({route}) {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button as={Link} color="primary" href="#">
+                    <Button as={Link} color="primary" href="/login">
                         登录
                     </Button>
                 </NavbarItem>
