@@ -16,7 +16,7 @@ export default async function ContentsDetail({searchParams, params}) {
         // video
         url: "http://10.16.2.6:18080/file/download/1700590492/8a7b5eb30fbc763dac7370bc5886c06e/d41d8cd98f00b204e9800998ecf8427e?n=uQGrtB4vaWcgKgCHwD0CD3en27fErciS&t=1701590524&s=5d393fd2fd741a5f4cf791d03f5b89f747f35b70&filename=test.mp4",
         // url: "/course-cover.png",
-        previewUrl: "http://192.168.31.106:8012/onlinePreview?url=aHR0cDovLzE5Mi4xNjguMzEuMTA2OjMwMDAvYXBpL3Rlc3QvMS5kb2N4&sign=81096171229a71798f3332708d7db7928a69e44845b3e0533412a06778993962&exp=9999999999999",
+        previewUrl: "/onlinePreview?url=aHR0cDovLzE5Mi4xNjguMzEuMTA2OjMwMDAvYXBpL3Rlc3QvMS5kb2N4&sign=81096171229a71798f3332708d7db7928a69e44845b3e0533412a06778993962&exp=9999999999999",
         type: "doc",
         size: 100,
         canDownload: true,
