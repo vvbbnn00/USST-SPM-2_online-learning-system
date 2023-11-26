@@ -3,9 +3,10 @@ import {Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@nex
 import React from "react";
 import {isAdmin, isLogin} from "@/utils/auth";
 import {AdminNavBarItem} from "@/components/layout/navbar/admin-dropdown-items";
+import {getCourseName} from "@/service/course";
 
 export default async function NavBarComp({route}) {
-    const siteName = "项目管理与过程改进";
+    const siteName = await getCourseName();
     const currentRoute = route || "/";
 
     return (<>

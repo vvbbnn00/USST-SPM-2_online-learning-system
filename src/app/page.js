@@ -2,31 +2,11 @@
 import React from "react";
 import NavBarComp from "@/components/layout/navbar";
 import {Button, Image, Link, Tooltip, User} from "@nextui-org/react";
+import {getCourseConfig} from "@/service/course";
 
 export default async function Home() {
-    const courseInfo = {
-        courseName: "项目管理与过程改进",
-        courseNumber: "(2023-2024-1)-12003580-01",
-        courseDescription: "本课程主要介绍项目管理的基本概念、原理、方法和工具，以及项目管理的过程改进方法。课程内容包括项目管理的基本概念、原理、方法和工具；项目管理的过程改进方法；项目管理的过程改进工具。本课程主要介绍项目管理的基本概念、原理、方法和工具，以及项目管理的过程改进方法。课程内容包括项目管理的基本概念、原理、方法和工具；项目管理的过程改进方法；项目管理的过程改进工具。本课程主要介绍项目管理的基本概念、原理、方法和工具，以及项目管理的过程改进方法。课程内容包括项目管理的基本概念、原理、方法和工具；项目管理的过程改进方法；项目管理的过程改进工具。本课程主要介绍项目管理的基本概念、原理、方法和工具，以及项目管理的过程改进方法。课程内容包括项目管理的基本概念、原理、方法和工具；项目管理的过程改进方法；项目管理的过程改进工具。本课程主要介绍项目管理的基本概念、原理、方法和工具，以及项目管理的过程改进方法。课程内容包括项目管理的基本概念、原理、方法和工具；项目管理的过程改进方法；项目管理的过程改进工具。",
-        courseType: "必修",
-        coursePicture: null,
-        studentCount: 114,
-    }
-
-    const teacherList = [
-        {
-            user_id: 1,
-            username: "admin",
-            name: "管理员",
-            avatar: "https://1906.usst.edu.cn/api/uploads/5658635/modified-image?thumbnail=200x200&crop_box=10,0,287,277"
-        },
-        {
-            user_id: 2,
-            username: "teacher",
-            name: "教师",
-            avatar: "https://1906.usst.edu.cn/api/uploads/5658635/modified-image?thumbnail=200x200&crop_box=10,0,287,277"
-        },
-    ]
+    const courseInfo = await getCourseConfig();
+    const teacherList = courseInfo.teacherList;
 
     return (
         <main>
@@ -40,13 +20,13 @@ export default async function Home() {
                                 <Image
                                     width={300}
                                     height={200}
-                                    src={courseInfo.coursePicture || "/course-cover.png"}
+                                    src={courseInfo.courseCover || "/course-cover.png"}
                                     alt={courseInfo.courseName}
                                 />
                             </div>
                             <div className={"flex flex-col justify-center"}>
                                 <div className={"text-2xl font-bold text-gray-950"}>{courseInfo.courseName}</div>
-                                <div className={"text-lg text-gray-700"}>{courseInfo.courseNumber}</div>
+                                <div className={"text-lg text-gray-700"}>{courseInfo.courseId}</div>
                                 <div>
                                     <Button
                                         className={"mt-5"}
@@ -54,7 +34,7 @@ export default async function Home() {
                                         as={Link}
                                         href={"/content"}
                                     >
-                                        开始学习（{courseInfo.studentCount}人）
+                                        开始学习（{courseInfo.studentNumber}人）
                                     </Button>
                                 </div>
                             </div>
@@ -77,7 +57,8 @@ export default async function Home() {
                                                 </td>
                                                 <td className={"text-gray-700 text-right"}>
                                                     <Tooltip content={courseInfo.courseName}>
-                                                        <span className={"line-clamp-1 break-all"}>{courseInfo.courseName}</span>
+                                                        <span
+                                                            className={"line-clamp-1 break-all"}>{courseInfo.courseName}</span>
                                                     </Tooltip>
                                                 </td>
                                             </tr>
@@ -94,8 +75,9 @@ export default async function Home() {
                                                     课程编号
                                                 </td>
                                                 <td className={"text-gray-700 text-right"}>
-                                                    <Tooltip content={courseInfo.courseNumber}>
-                                                        <span className={"line-clamp-1 break-all"}>{courseInfo.courseNumber}</span>
+                                                    <Tooltip content={courseInfo.courseId}>
+                                                        <span
+                                                            className={"line-clamp-1 break-all"}>{courseInfo.courseId}</span>
                                                     </Tooltip>
                                                 </td>
                                             </tr>
@@ -104,7 +86,7 @@ export default async function Home() {
                                                     学生人数
                                                 </td>
                                                 <td className={"text-gray-700 text-right line-clamp-1"}>
-                                                    {courseInfo.studentCount}人
+                                                    {courseInfo.studentNumber}人
                                                 </td>
                                             </tr>
                                             </tbody>
@@ -117,10 +99,10 @@ export default async function Home() {
                                         {
                                             teacherList.map((teacher) => {
                                                 return (
-                                                    <div className={"mt-1.5"} key={teacher.user_id}>
+                                                    <div className={"mt-1.5"} key={teacher.userId}>
                                                         <User
                                                             name={teacher.name}
-                                                            description={`${teacher.username} #${teacher.user_id}`}
+                                                            description={`${teacher.username} #${teacher.userId}`}
                                                             avatarProps={{
                                                                 src: teacher.avatar,
                                                             }}

@@ -28,4 +28,50 @@ export default class StudyProgressDAO {
         }]
     }
 
+
+    /**
+     * 获取某一个学习内容的学习进度
+     *
+     */
+    static async queryByContentId({contentId}) {
+        // TODO: 根据content_id获取每个用户的学习进度
+
+        return [{
+            content_id: contentId,
+            user_id: 1,
+            status: "finished",
+            last_time: new Date(),
+            user: {
+                user_id: 1,
+                username: "vvbbnn00",
+                name: "张三",
+                employee_id: "10001",
+                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
+            }
+        },{
+            content_id: contentId,
+            user_id: 2,
+            status: "finished",
+            last_time: new Date(),
+            user: {
+                user_id: 1,
+                username: "vvbbnn00",
+                name: "张三",
+                employee_id: "10001",
+                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
+            }
+        },{
+            content_id: contentId,
+            user_id: 3,
+            status: "finished",
+            last_time: new Date(),
+            user: {
+                user_id: 1,
+                username: "vvbbnn00",
+                name: "张三",
+                employee_id: "10001",
+                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
+            }
+        }]
+    }
 }
