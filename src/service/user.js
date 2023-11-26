@@ -1,8 +1,8 @@
 import UserDAO from "@/dao/user";
-import {doBcrypt} from "@/utils/security";
+import {doCompare} from "@/utils/security";
 import LogDAO from "@/dao/log";
 
-export async function login(username, password) {
+export async function login({username, password, ip}) {
     username = username.trim();
     password = password.trim();
 
@@ -15,20 +15,31 @@ export async function login(username, password) {
         throw new Error('用户名或密码错误');
     }
 
-    const hashPassword = doBcrypt(password);
-    if (user.password !== hashPassword) {
+    const passwordPass = doCompare(password, user.password);
+    if (!passwordPass) {
         throw new Error('用户名或密码错误');
     }
 
     LogDAO.addLog({
         time: new Date(),
         type: 'login',
-        detail: '用户登录',
+        detail: '用户登录, IP: ' + ip,
         user_id: user.user_id
     }).catch((err) => {
-        console.trace("[service/user.js] LogDAO.addLog error: ", err);
+        console.error("[service/user.js] LogDAO.addLog error: ", err);
     });
 
     return user;
 }
 
+
+export async function logout({userId, ip}) {
+    LogDAO.addLog({
+        time: new Date(),
+        type: 'logout',
+        detail: '用户登出, IP: ' + ip,
+        user_id: userId
+    }).catch((err) => {
+        console.error("[service/user.js] LogDAO.addLog error: ", err);
+    });
+}

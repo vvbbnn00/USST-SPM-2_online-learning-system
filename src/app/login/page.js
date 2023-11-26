@@ -6,9 +6,13 @@ import {redirect} from "next/navigation";
 import NavBarComp from "@/components/layout/navbar";
 import {LoginSubmitButton} from "@/app/login/login-button";
 import doLogin from "@/app/login/actions";
+import {isLogin} from "@/utils/auth";
 
 
 export default async function Login({searchParams}) {
+    if (await isLogin()) {
+        redirect("/")
+    }
 
     let {error} = searchParams;
     const s = await session();
@@ -42,7 +46,7 @@ export default async function Login({searchParams}) {
                             <div className="space-y-2">
                                 <form action={doLogin}>
                                     <div>用户名</div>
-                                    <Input id="username" name={"username"} placeholder="username" isRequired
+                                    <Input id="username" name={"username"} placeholder="用户名" isRequired
                                            type="text"/>
                                     <div className={"mt-2.5"}>密码</div>
                                     <Input id="password" name={"password"} placeholder="******" isRequired

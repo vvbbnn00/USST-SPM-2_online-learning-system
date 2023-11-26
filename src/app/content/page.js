@@ -3,11 +3,16 @@ import React from "react";
 import NavBarComp from "@/components/layout/navbar";
 import {Button, Image, Link, Tooltip, User} from "@nextui-org/react";
 import ContentList from "@/app/content/content-list";
-import {isTeacher} from "@/utils/auth";
+import {isLogin, isTeacher} from "@/utils/auth";
 import {IconAdd} from "@/components/icons/IconAdd";
 import {getContentList} from "@/service/content";
+import {redirect} from "next/navigation";
 
 export default async function Contents() {
+    if (!await isLogin()) {
+        return redirect("/login")
+    }
+
     const contentList = await getContentList();
 
     return <>

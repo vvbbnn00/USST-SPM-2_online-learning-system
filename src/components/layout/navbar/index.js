@@ -1,13 +1,15 @@
 "use server"
-import {Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem} from "@nextui-org/react";
+import {Button, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, User} from "@nextui-org/react";
 import React from "react";
-import {isAdmin, isLogin} from "@/utils/auth";
+import {getUserData, isAdmin, isLogin} from "@/utils/auth";
 import {AdminNavBarItem} from "@/components/layout/navbar/admin-dropdown-items";
 import {getCourseName} from "@/service/course";
+import {UserNavBarItem} from "@/components/layout/navbar/user-dropdown-items";
 
 export default async function NavBarComp({route}) {
     const siteName = await getCourseName();
     const currentRoute = route || "/";
+    const userData = await getUserData();
 
     return (<>
         <Navbar>
@@ -25,15 +27,15 @@ export default async function NavBarComp({route}) {
                         首页
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive={
-                    currentRoute === "/content"
-                }>
-                    <Link href="/content" aria-current="page">
-                        学习内容
-                    </Link>
-                </NavbarItem>
                 {
                     await isLogin() ? <>
+                        <NavbarItem isActive={
+                            currentRoute === "/content"
+                        }>
+                            <Link href="/content" aria-current="page">
+                                学习内容
+                            </Link>
+                        </NavbarItem>
                         <NavbarItem isActive={
                             currentRoute === "/exam"
                         }>
@@ -58,9 +60,15 @@ export default async function NavBarComp({route}) {
             </NavbarContent>
             <NavbarContent justify="end">
                 <NavbarItem>
-                    <Button as={Link} color="primary" href="/login">
-                        登录
-                    </Button>
+                    {
+                        userData ? <div className={"flex flex-row items-center gap-2"}>
+                            <UserNavBarItem userData={userData} route={route}/>
+                        </div> : <>
+                            <Button as={Link} color="primary" href="/login">
+                                登录
+                            </Button>
+                        </>
+                    }
                 </NavbarItem>
             </NavbarContent>
         </Navbar>

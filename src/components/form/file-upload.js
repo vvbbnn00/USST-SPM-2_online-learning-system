@@ -28,8 +28,18 @@ export default function FileUpload({onUploaded, defaultFile}) {
 
     const getUploadUrl = async () => {
         try {
+            const exts = file.name.split(".");
+            const ext = exts[exts.length - 1].length < 20 ? exts[exts.length - 1] : "unknown";
             const res = await fetch("/api/upload", {
                 method: "POST",
+                body: JSON.stringify({
+                    fileName: file.name.length < 255 ? file.name : "filename_too_long" + "." + ext,
+                    fileSize: file.size,
+                    fileType: ext
+                }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
             const json = await res.json();
             return {
@@ -49,7 +59,7 @@ export default function FileUpload({onUploaded, defaultFile}) {
             const result = await fetch(`/api/upload/${uploadId}`, {
                 method: "POST",
                 body: JSON.stringify({
-                    fileId
+                    storageId: fileId
                 }),
                 headers: {
                     'Content-Type': 'application/json'
