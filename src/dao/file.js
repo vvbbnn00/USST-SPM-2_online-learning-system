@@ -1,5 +1,6 @@
 import {db} from "@/dao/connection";
 import LogDAO from "@/dao/log";
+import {generateUpdateFields} from "@/utils/db";
 
 export default class FileDAO {
 
@@ -51,28 +52,10 @@ export default class FileDAO {
             throw new Error('Invalid status');
         }
 
-        const updateFields = [];
-        const params = [];
-        if (filename !== null) {
-            updateFields.push('filename = ?');
-            params.push(filename);
-        }
-        if (type !== null) {
-            updateFields.push('type = ?');
-            params.push(type);
-        }
-        if (size !== null) {
-            updateFields.push('size = ?');
-            params.push(size);
-        }
-        if (storage_id !== null) {
-            updateFields.push('storage_id = ?');
-            params.push(storage_id);
-        }
-        if (status !== null) {
-            updateFields.push('status = ?');
-            params.push(status);
-        }
+        const [updateFields, params] = generateUpdateFields({
+            filename, type, size, storage_id, status
+        });
+
         params.push(file_id);
 
         if (updateFields.length === 0) {

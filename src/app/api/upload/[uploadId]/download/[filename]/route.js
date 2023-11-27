@@ -5,16 +5,9 @@ import {generateDownloadUrlByFileStorageId} from "@/utils/file";
 import {NextResponse} from "next/server";
 
 export async function GET(request, {params}) {
-    const userData = await getUserData();
-    if (!userData) {
-        return new Response(null, {
-            status: 401
-        });
-    }
-
     const ip = getIpAddressFromRequest();
     let {uploadId} = params;
-    // uploadId可以是数字id，也可以是数字id+.后缀
+    let userData = null;
 
     if (isNaN(uploadId)) {
         return new Response(null, {
@@ -26,6 +19,13 @@ export async function GET(request, {params}) {
     // 允许文件预览组件访问
     if (ip.indexOf("127.0.0.1") !== -1) {
         hasAccess = true;
+    } else {
+        userData = await getUserData();
+        if (!userData) {
+            return new Response(null, {
+                status: 401
+            });
+        }
     }
     if (await isTeacher()) {
         hasAccess = true;
@@ -37,7 +37,7 @@ export async function GET(request, {params}) {
             fileId: uploadId
         });
 
-        if (file.fileCreateBy === userData.userId) {
+        if (file.fileCreateBy === userData?.userId) {
             hasAccess = true;
         }
 

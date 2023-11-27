@@ -2,7 +2,7 @@
 import React from "react";
 import NavBarComp from "@/components/layout/navbar";
 import {Button, Link, Tooltip} from "@nextui-org/react";
-import ContentForm from "@/app/content/[contentId]/edit/content-form";
+import ContentForm from "@/components/layout/content-form/content-form";
 import {getContentDetail} from "@/service/content";
 import {notFound} from "next/navigation";
 
@@ -34,7 +34,8 @@ export default async function ContentsDetail({searchParams, params}) {
                         <div className={"flex flex-1 justify-center p-1.5"}>
                             <Tooltip content={contentDetail.chapter}>
                                 <div className={"flex gap-2.5 items-center"}>
-                                    <span className={"text-gray-950 font-bold text-xl"}>编辑 - {contentDetail.contentName}</span>
+                                    <span
+                                        className={"text-gray-950 font-bold text-xl"}>编辑 - {contentDetail.contentName}</span>
                                 </div>
                             </Tooltip>
                         </div>

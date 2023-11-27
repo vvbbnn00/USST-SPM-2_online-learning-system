@@ -49,6 +49,7 @@ export function AdminNavBarItem({route}) {
                 <DropdownItem
                     key="/admin/system"
                     description="编辑系统信息和课程信息。"
+                    href="/admin/system"
                 >
                     系统管理
                 </DropdownItem>

@@ -1,11 +1,29 @@
 "use client";
 import {Button, Input, Select, SelectItem} from "@nextui-org/react";
-import React from "react";
+import React, {useEffect} from "react";
 import FileUpload from "@/components/form/file-upload";
+import {formCreateContent} from "@/components/layout/content-form/actions";
+import {useFormStatus, useFormState} from "react-dom";
+
+const Submit = () => {
+    const {pending} = useFormStatus();
+
+    return <Button
+        auto
+        type={"submit"}
+        color={"primary"}
+        size={"lg"}
+        className={"w-full"}
+        isLoading={pending}
+    >
+        保存
+    </Button>
+}
 
 export default function ContentForm({content}) {
 
-    const [uploadId, setUploadId] = React.useState("");
+    const [uploadId, setUploadId] = React.useState(content?.contentFile?.fileId || "");
+    const [state, formAction] = useFormState(formCreateContent, {});
 
     if (content?.contentFile) {
         content.file = {
@@ -14,8 +32,25 @@ export default function ContentForm({content}) {
         }
     }
 
+    useEffect(() => {
+        if (state?.code === 200) {
+            location.href = `/content/${state?.contentId}`;
+        }
+    }, [state]);
+
     return <div className={"w-[500px]"}>
-        <form className={"flex flex-col gap-5"}>
+        <form className={"flex flex-col gap-5"} action={formAction}>
+
+            {(state?.code && state?.code !== 200) &&
+                <div className={"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"}
+                     role="alert">
+                    <strong className={"font-bold"}>
+                        {content ? "更新" : "创建"}失败：
+                    </strong>
+                    <span className={"block sm:inline"}>{state?.message}</span>
+                </div>
+            }
+
             <input name={"contentId"} type={"hidden"} value={content?.contentId}/>
             <Input
                 label={"教学材料名称"}
@@ -32,7 +67,7 @@ export default function ContentForm({content}) {
                 size={"lg"}
                 type={"text"}
                 name={"chapter"}
-                minLength={0}
+                minLength={1}
                 maxLength={255}
                 isRequired={true}
                 defaultValue={content?.chapter}
@@ -80,15 +115,7 @@ export default function ContentForm({content}) {
             </div>
 
             <div>
-                <Button
-                    auto
-                    type={"submit"}
-                    color={"primary"}
-                    size={"lg"}
-                    className={"w-full"}
-                >
-                    保存
-                </Button>
+                <Submit/>
             </div>
         </form>
     </div>

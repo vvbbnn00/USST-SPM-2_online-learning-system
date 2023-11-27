@@ -23,3 +23,15 @@ export const cacheStore = new Redis({
     port: REDIS_PORT,
     keyPrefix: 'online-learning:cache:'
 });
+
+export const convertAsync = (task, context) => {
+    return (...args) => {
+        return new Promise((resolve, reject) => {
+            try {
+                resolve(task.apply(context, args));
+            } catch (err) {
+                reject(err);
+            }
+        });
+    };
+};

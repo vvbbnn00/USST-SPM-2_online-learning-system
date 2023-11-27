@@ -1,6 +1,5 @@
-// dbConfig.js
-const mysql = require('mysql2');
-const {MysqlConfig} = require("@/config/mysql.config");
+import {MysqlConfig} from "@/config/mysql.config";
+import mysql from 'mysql2';
 
 const pool = mysql.createPool(MysqlConfig);
 

@@ -8,6 +8,7 @@ import FilePreview from "@/components/layout/preview/file-preview";
 import {parseSize} from "@/utils/string";
 import {getContentDetail} from "@/service/content";
 import {notFound} from "next/navigation";
+import {isTeacher} from "@/utils/auth";
 
 export default async function ContentsDetail({searchParams, params}) {
     const contentId = params.contentId;
@@ -48,7 +49,7 @@ export default async function ContentsDetail({searchParams, params}) {
                         <div className={"flex flex-1 justify-center"}>
                             <Tooltip content={contentDetail.chapter}>
                                 <div className={"flex gap-2.5 items-center"}>
-                                    <FileIconRounded type={"pdf"}/>
+                                    <FileIconRounded type={contentDetail.contentType}/>
                                     <span
                                         className={"text-gray-950 font-bold text-xl"}>{contentDetail.contentName}</span>
                                 </div>
@@ -81,7 +82,7 @@ export default async function ContentsDetail({searchParams, params}) {
                                         color={"primary"}
                                         size={"lg"}
                                         className={"w-1/4"}
-                                        isDisabled={!file.canDownload}
+                                        isDisabled={!file.canDownload && !await isTeacher()}
                                         variant={"solid"}
                                         as={Link}
                                         href={file.url}
@@ -89,6 +90,11 @@ export default async function ContentsDetail({searchParams, params}) {
                                         下载
                                     </Button>
                                 </div>
+                                {(await isTeacher() && !file.canDownload) &&
+                                    <div className={"text-red-500 text-sm text-center"}>
+                                        该教学材料仅允许查看，学生无法下载
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
