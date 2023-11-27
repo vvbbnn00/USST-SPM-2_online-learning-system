@@ -8,6 +8,9 @@ import LogDAO from "@/dao/log";
 
 export async function getContentList() {
     const userData = await getUserData();
+    if (!userData) {
+        return [];
+    }
 
     let returnList;
 
@@ -30,7 +33,7 @@ export async function getContentList() {
     // 获取用户的学习进度
     if (await isStudent()) {
         const progressList = await StudyProgressDAO.queryListByUserId({
-            userId: userData.userId
+            userId: userData?.userId
         });
         const progressMap = {};
         progressList.forEach(item => {

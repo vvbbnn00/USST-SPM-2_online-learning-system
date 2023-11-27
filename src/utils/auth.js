@@ -82,7 +82,7 @@ export async function getUserData() {
     const avatar = await s.get('avatar');
     const employeeId = await s.get('employeeId');
 
-    if (!userId || !username || !role || !name || !avatar || !employeeId) {
+    if (!userId || !username || !role || !name || !employeeId) {
         return null;
     }
 

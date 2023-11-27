@@ -7,15 +7,30 @@ import {IconEdit} from "@/components/icons/IconEdit";
 import FilePreview from "@/components/layout/preview/file-preview";
 import {parseSize} from "@/utils/string";
 import {getContentDetail} from "@/service/content";
-import {notFound} from "next/navigation";
-import {isTeacher} from "@/utils/auth";
+import {notFound, redirect} from "next/navigation";
+import {getUserData, isStudent, isTeacher} from "@/utils/auth";
+import {updateProgress} from "@/service/study-progress";
 
 export default async function ContentsDetail({searchParams, params}) {
+    const userData = await getUserData();
+    if (!userData) {
+        return redirect('/login');
+    }
     const contentId = params.contentId;
 
     const contentDetail = await getContentDetail({contentId});
     if (contentDetail == null) {
         return notFound();
+    }
+
+    if (await isStudent()) {
+        updateProgress({
+            contentId: contentId,
+            status: 'finished',
+            userId: userData.userId
+        }).catch(e => {
+            console.error(`[content/${contentId}/page.js] updateProgress error: ${e.message}`);
+        })
     }
 
     const file = {
@@ -58,14 +73,16 @@ export default async function ContentsDetail({searchParams, params}) {
 
                         <div className={"flex"}>
                             <div className={"flex gap-2.5 items-center justify-end"}>
-                                <Button
-                                    as={Link}
-                                    href={`/content/${contentDetail.contentId}/edit`}
-                                    color={"default"}
-                                    startContent={<IconEdit fill={"#737373"}/>}
-                                >
-                                    编辑
-                                </Button>
+                                {await isTeacher() &&
+                                    <Button
+                                        as={Link}
+                                        href={`/content/${contentDetail.contentId}/edit`}
+                                        color={"default"}
+                                        startContent={<IconEdit fill={"#737373"}/>}
+                                    >
+                                        编辑
+                                    </Button>
+                                }
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,9 @@ export function ContentItem({item}) {
                         <ModalBody>
                             <div className={"flex flex-col gap-2.5"}>
                                 {isLoading && <div>加载中...</div>}
-                                {error && <div>加载失败</div>}
+                                {(error || (data && data?.code !== 200)) && <div>
+                                    加载失败： {data?.message}
+                                </div>}
                                 {data && <div className={"flex flex-col gap-2.5"}>
                                     {data?.data?.list?.map((item, index) => {
                                         return <div key={index.toString()} className={"flex flex-col gap-1"}>

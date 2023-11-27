@@ -5,8 +5,13 @@ import {Button, Link, Tooltip} from "@nextui-org/react";
 import ContentForm from "@/components/layout/content-form/content-form";
 import {getContentDetail} from "@/service/content";
 import {notFound} from "next/navigation";
+import {isTeacher} from "@/utils/auth";
 
 export default async function ContentsDetail({searchParams, params}) {
+    if (!await isTeacher()) {
+        return notFound();
+    }
+
     const contentId = params.contentId;
     const contentDetail = await getContentDetail({contentId});
     if (contentDetail == null) {

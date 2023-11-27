@@ -1,3 +1,6 @@
+import {generateUpdateFields} from "@/utils/db";
+import {db} from "@/dao/connection";
+
 export default class StudyProgressDAO {
 
     /**
@@ -7,25 +10,16 @@ export default class StudyProgressDAO {
      * 返回的格式应当是一个数组，数组中包括了所有的教学材料
      */
     static async queryListByUserId({userId}) {
+        const sql = `
+            SELECT 
+                content_id, user_id, status, last_time
+            FROM progress 
+            WHERE user_id = ?;
+        `;
+        const params = [userId];
 
-        // TODO: 获取用户学习进度列表
-
-        return [{
-            content_id: 1,
-            user_id: userId,
-            status: "finished",
-            last_time: new Date(),
-        },{
-            content_id: 3,
-            user_id: userId,
-            status: "finished",
-            last_time: new Date(),
-        },{
-            content_id: 4,
-            user_id: userId,
-            status: "finished",
-            last_time: new Date(),
-        }]
+        const [rows] = await db.execute(sql, params);
+        return rows;
     }
 
 
@@ -34,44 +28,41 @@ export default class StudyProgressDAO {
      *
      */
     static async queryByContentId({contentId}) {
-        // TODO: 根据content_id获取每个用户的学习进度
+        const sql = `
+            SELECT 
+                content_id, user.user_id as user_id, status, last_time,
+                username, name, employee_id, avatar
+            FROM user 
+            LEFT JOIN progress on user.user_id = progress.user_id AND progress.content_id = ?
+            WHERE user.role = 'student';
+        `;
+        const params = [contentId];
 
-        return [{
-            content_id: contentId,
-            user_id: 1,
-            status: "finished",
-            last_time: new Date(),
-            user: {
-                user_id: 1,
-                username: "vvbbnn00",
-                name: "张三",
-                employee_id: "10001",
-                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
-            }
-        },{
-            content_id: contentId,
-            user_id: 2,
-            status: "finished",
-            last_time: new Date(),
-            user: {
-                user_id: 1,
-                username: "vvbbnn00",
-                name: "张三",
-                employee_id: "10001",
-                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
-            }
-        },{
-            content_id: contentId,
-            user_id: 3,
-            status: "finished",
-            last_time: new Date(),
-            user: {
-                user_id: 1,
-                username: "vvbbnn00",
-                name: "张三",
-                employee_id: "10001",
-                avatar: "https://avatars.githubusercontent.com/u/46409975?v=4"
-            }
-        }]
+        const [rows] = await db.execute(sql, params);
+        return rows;
+    }
+
+
+    /**
+     * 更新学习进度
+     * @param contentId
+     * @param userId
+     * @param status
+     * @returns {Promise<boolean>}
+     */
+    static async update({contentId, userId, status}) {
+        if (!['finished', 'unfinished'].includes(status)) {
+            throw new Error('参数错误');
+        }
+        const params = [];
+        const sql = `
+            REPLACE INTO progress (content_id, user_id, status) 
+            VALUES (?, ?, ?);
+        `;
+
+        params.push(contentId, userId, status);
+
+        const [rows] = await db.execute(sql, params);
+        return rows.affectedRows > 0;
     }
 }

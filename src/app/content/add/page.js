@@ -3,8 +3,13 @@ import React from "react";
 import NavBarComp from "@/components/layout/navbar";
 import {Button, Link} from "@nextui-org/react";
 import ContentForm from "@/components/layout/content-form/content-form";
+import {notFound} from "next/navigation";
+import {isTeacher} from "@/utils/auth";
 
 export default async function ContentsDetail() {
+    if (!await isTeacher()) {
+        return notFound();
+    }
 
     return <>
         <NavBarComp route={"/content"}/>
