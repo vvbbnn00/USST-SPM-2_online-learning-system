@@ -23,8 +23,8 @@ export default function OfficePreview({file}) {
                 在新窗口打开
             </Button>
         </div>
-        <div className={"flex w-full mb-10 h-[768px]"}>
-            {loading && <div className={"w-full h-full flex flex-col gap-5 justify-center items-center bg-gray-100"}>
+        <div className={"flex w-full mb-10 h-[768px] relative"}>
+            {loading && <div className={"w-full h-full flex flex-col gap-5 justify-center items-center bg-gray-100 absolute"}>
                 <div><Spinner /></div>
                 <div className={"text-xl text-gray-500 font-bold"}>正在加载</div>
             </div>}
@@ -34,7 +34,6 @@ export default function OfficePreview({file}) {
                     title={"office-preview"}
                     style={{
                         height: "768px",
-                        width: loading ? "0px" : "100%",
                     }}
                     onLoad={() => {
                         setLoading(false);
