@@ -50,7 +50,7 @@ export function ContentItem({item}) {
                     <>
                         <ModalHeader className="flex flex-col gap-1">完成情况</ModalHeader>
                         <ModalBody>
-                            <div className={"flex flex-col gap-2.5"}>
+                            <div className={"flex flex-col gap-2.5 max-h-[500px] overflow-y-auto"}>
                                 {isLoading && <div>加载中...</div>}
                                 {(error || (data && data?.code !== 200)) && <div>
                                     加载失败： {data?.message}
