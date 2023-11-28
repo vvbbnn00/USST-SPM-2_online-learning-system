@@ -1,4 +1,7 @@
 import {db} from "@/dao/connection";
+import {generateUpdateFields} from "@/utils/db";
+import {doBcrypt} from "@/utils/security";
+import {ServerInsertedHTMLContext} from "next/navigation";
 
 export default class UserDAO {
     static async query({user_id = null, username = null, withPassword = false}) {
@@ -88,4 +91,51 @@ export default class UserDAO {
         const [rows] = await db.query(sql, params);
         return rows?.affectedRows === 1;
     }
+
+    static async update({
+                            user_id,
+                            username = null,
+                            name = null,
+                            employee_id = null,
+                            role = null,
+                            avatar = null,
+                            password = null
+                        }) {
+        if (username !== null) {
+            const user = await this.query({username});
+            if (user && user.user_id !== user_id) {
+                throw new Error('用户名已存在');
+            }
+
+        }
+        const [updateField, params] = generateUpdateFields({username, name, employee_id, role, avatar});
+        if (password) {
+            updateField.push('password=?');
+            params.push(doBcrypt(password));
+        }
+        const sql = `
+        UPDATE user
+        SEt ${updateField}
+        WHERE user_id=?;
+        `
+        params.push(user_id);
+        const [rows] = await db.execute(sql, params);
+        return rows?.affectedRows === 1;
+    }
+
+    static async insert({username, password, name, employee_id, role, avatar = null}) {
+        const user = await this.query({username});
+        if (user) {
+            throw new Error('用户名已存在');
+        }
+        const sql = `
+            INSERT INTO user (username, password, name, employee_id, role, avatar)
+            VALUES (?, ?, ?, ?, ?, ?);
+        `
+        const params = [username, doBcrypt(password), name, employee_id, role, avatar];
+        const [rows] = await db.execute(sql, params);
+        return rows?.insertId;
+    }
+
 }
+
