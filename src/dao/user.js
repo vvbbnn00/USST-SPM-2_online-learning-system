@@ -69,7 +69,7 @@ export default class UserDAO {
         return rows[0].count;
     }
 
-    static async delete({user_id = null, username = null}) {
+    static async remove({user_id = null, username = null}) {
         // 如果没有传入user_id和username，返回null
         if (!user_id && !username) {
             return false;

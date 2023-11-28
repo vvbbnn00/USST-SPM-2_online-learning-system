@@ -35,7 +35,8 @@ export function AdminNavBarItem({route}) {
                     用户管理
                 </DropdownItem>
                 <DropdownItem
-                    key="/admin/question"
+                    key="/admin/question-bank"
+                    href="/admin/question-bank"
                     description="可查看题库中的题目。"
                 >
                     题库管理
