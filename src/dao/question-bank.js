@@ -97,7 +97,6 @@ export default class QuestionBankDAO {
             INSERT INTO question_bank(title, description, status, percentage)
             VALUES (?, ?, ?, ?);
         `
-        console.log(title, description, status, percentage)
 
         const params = [title, description, status, percentage];
         const [rows] = await db.query(sql, params);

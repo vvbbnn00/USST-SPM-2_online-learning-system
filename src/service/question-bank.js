@@ -44,14 +44,14 @@ export async function deleteQuestionBank({questionBankId}) {
     LogDAO.addLog({
         time: new Date(),
         type: 'question-bank',
-        detail: `用户: ${name}, 删除题库: ${questionBankId}`,
+        detail: `用户: ${userData.username}, 删除题库: ${questionBankId}`,
         user_id: userData.userId
     }).catch((err) => {
         console.error("[service/question-bank-bank.js] LogDAO.addLog error: ", err);
     })
 
     const ret = await QuestionBankDAO.remove({
-        questionBankId: this.questionBankId
+        questionBankId: questionBankId
     });
     if (!ret) {
         throw new Error('删除题库失败');

@@ -24,6 +24,7 @@
     "react-h5-audio-player": "^3.9.0",
     "swr": "^2.2.4",
     "tailwindcss": "3.3.5",
+    "tls": "^0.0.1",
     "video-react": "^0.16.0",
     "zod": "^3.22.4"
   }

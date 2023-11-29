@@ -97,17 +97,6 @@ export default function QuestionBankForm({QuestionBank}) {
 
                 <div>
                     <Submit/>
-                    {/*如果为新增页面,则不显示删除按钮*/}
-                    {/*{QuestionBank?.question_bank_id && (*/}
-                    {/*    <Button*/}
-                    {/*        auto*/}
-                    {/*        color={"danger"}*/}
-                    {/*        size={"lg"}*/}
-                    {/*        className={"w-full mt-5"}*/}
-                    {/*    >*/}
-                    {/*        删除*/}
-                    {/*    </Button>*/}
-                    {/*)}*/}
                 </div>
 
                 <div className="text-default-500 text-small mt-1">

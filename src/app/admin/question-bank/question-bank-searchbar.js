@@ -64,7 +64,7 @@ export default function QuestionBankSearchbar() {
 
                     <div className="flex">
                         <Button
-                            color="primary"
+                            color="default"
                             className="capitalize h-12 mr-2"
                             onClick={() => {
                                 const sp = new URLSearchParams(searchParams);
@@ -79,7 +79,7 @@ export default function QuestionBankSearchbar() {
                         <Button
                             as={Link}
                             href={"/admin/question-bank/add"}
-                            color="primary"
+                            color="default"
                             className="capitalize h-12"
                         >
                             新增

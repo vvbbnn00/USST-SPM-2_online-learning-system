@@ -1,23 +1,32 @@
 "use client"
 
-import React from "react";
+import React, {useState} from "react";
 import {useRouter, useSearchParams} from "next/navigation";
 import {
     Button, Chip,
-    Link,
+    Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader,
     Pagination,
     Table,
     TableBody,
     TableCell,
     TableColumn,
     TableHeader,
-    TableRow,
+    TableRow, useDisclosure,
 } from "@nextui-org/react";
 import {IconEdit} from "@/components/icons/IconEdit";
 
 export default function QuestionBankTable({questionBankList, pages}) {
     const searchParams = useSearchParams();
     const router = useRouter();
+    const {isOpen, onOpen, onOpenChange} = useDisclosure();
+
+    const [questionBankId, setQuestionBankId] = useState(null);
+    const deleteQuestionBank = (qbId) => {
+        setQuestionBankId(qbId);
+        onOpen();
+    }
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const columns = [
         {
@@ -41,14 +50,6 @@ export default function QuestionBankTable({questionBankList, pages}) {
             uid: "operation",
         }
     ];
-
-    const changeStatus = (status) => {
-        const sp = new URLSearchParams(searchParams);
-        sp.set('status', status);
-        sp.set('page', 1)
-
-        location.href = `/questionBank?${sp.toString()}`;
-    }
 
     const renderChip = (status) => {
         switch (status) {
@@ -103,10 +104,10 @@ export default function QuestionBankTable({questionBankList, pages}) {
                     <div className={"flex justify-center"}>
                         <div className={"text-medium text-gray-500"}>
                             <Button
-                                color={"primary"}
+                                color={"warning"}
                                 as={Link}
-                                startContent={<IconEdit/>}
                                 size={"md"}
+                                variant={"flat"}
                                 onClick={() => {
                                     router.push(`/admin/question-bank/${item.question_bank_id}/edit`)
                                     router.refresh();
@@ -114,6 +115,19 @@ export default function QuestionBankTable({questionBankList, pages}) {
                             >
                                 查看详情 & 编辑
                             </Button>
+
+                            <Button
+                                color={"danger"}
+                                size={"md"}
+                                className={"ml-2"}
+                                variant={"flat"}
+                                onClick={() => {
+                                    deleteQuestionBank(item.question_bank_id)
+                                }}
+                            >
+                                删除
+                            </Button>
+
                         </div>
                     </div>
                 );
@@ -152,6 +166,48 @@ export default function QuestionBankTable({questionBankList, pages}) {
                     </TableBody>
                 </Table>
             </div>
+
+            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                <ModalContent>
+                    {(onClose) => (
+                        <>
+                            <ModalHeader className="flex flex-col gap-1">确认</ModalHeader>
+                            <ModalBody>
+                                <p>
+                                    确认删除吗?
+                                </p>
+                            </ModalBody>
+                            <ModalFooter>
+                                <Button color="danger" variant="light" onPress={onClose}>
+                                    取消
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    isLoading={isLoading}
+                                    onClick={
+                                    () => {
+                                        setIsLoading(true);
+                                        fetch(`/api/question-bank/${questionBankId}`, {
+                                            method: 'DELETE',
+                                        }).then(r => {
+                                            if (r.status === 200) {
+                                                router.push("/admin/question-bank")
+                                                router.refresh();
+                                            }
+                                        }).finally(() => {
+                                            setIsLoading(false);
+                                            onClose();
+                                        })
+                                    }
+
+                                }>
+                                    删除
+                                </Button>
+                            </ModalFooter>
+                        </>
+                    )}
+                </ModalContent>
+            </Modal>
 
             <div className={"p-5 flex justify-center"}>
                 <Pagination
