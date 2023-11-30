@@ -10,7 +10,8 @@ export default function NotFound() {
     const { asPath } = useRouter()
     return (<>
         <title>SPM2 - Not Found</title>
-        <div className="flex rounded-lg shadow-xl pb-20 p-24" style={{ backgroundColor: "#87CEEB" }}>
+        {/* https://stackoverflow.com/questions/72673561/tailwind-h-screen-container-is-header-amount-of-height-too-far-off-the-bottom */}
+        <div className="p-24 h-screen" style={{ backgroundColor: "#87CEEB" }}>
             <font size={4} color="#FFFFFF">
                 <p style={{ fontSize: "100pt", margin: 0, paddingBottom: "20pt" }}>:(</p>
                 <p style={{ fontSize: "20pt", margin: 0, padding: 0 }}>
