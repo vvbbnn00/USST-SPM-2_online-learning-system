@@ -3,7 +3,7 @@ import {getUserData} from "@/utils/auth";
 import LogDAO from "@/dao/log";
 
 export async function getQuestionBankTotal({kw = null, status = null}) {
-    const ret = await QuestionBankDAO.count({
+    const ret = await new QuestionBankDAO().count({
         kw: kw,
         status: status
     });
@@ -14,7 +14,7 @@ export async function getQuestionBankTotal({kw = null, status = null}) {
 }
 
 export async function searchQuestionBankList({kw = null, status = null, page = 1, pageSize = 10}) {
-    const ret = await QuestionBankDAO.queryMany({
+    const ret = await new QuestionBankDAO().queryMany({
         kw: kw,
         status: status,
         page: page,
@@ -27,7 +27,7 @@ export async function searchQuestionBankList({kw = null, status = null, page = 1
 }
 
 export async function getQuestionBank({question_bank_id}) {
-    const ret = await QuestionBankDAO.query({
+    const ret = await new QuestionBankDAO().query({
         question_bank_id: question_bank_id
     });
     if (!ret) {
@@ -50,7 +50,7 @@ export async function deleteQuestionBank({questionBankId}) {
         console.error("[service/question-bank-bank.js] LogDAO.addLog error: ", err);
     })
 
-    const ret = await QuestionBankDAO.remove({
+    const ret = await new QuestionBankDAO().remove({
         questionBankId: questionBankId
     });
     if (!ret) {
@@ -75,7 +75,7 @@ export async function createQuestionBank({title, description, status, percentage
         console.error("[service/question-bank-bank.js] LogDAO.addLog error: ", err);
     })
 
-    const question_bank_id = await QuestionBankDAO.insert({
+    const question_bank_id = await new QuestionBankDAO().insert({
         title: title,
         description: description,
         status: status,
@@ -101,7 +101,7 @@ export async function updateQuestionBank({questionBankId, title, description, st
         console.error("[service/question-bank-bank.js] LogDAO.addLog error: ", err);
     })
 
-    const ret = await QuestionBankDAO.update({
+    const ret = await new QuestionBankDAO().update({
         questionBankId: questionBankId,
         title: title,
         description: description,
@@ -125,7 +125,7 @@ export async function duplicateQuestionBank({questionBankId}) {
         console.error("[service/question-bank-bank.js] LogDAO.addLog error: ", err);
     })
 
-    const ret = await QuestionBankDAO.duplicate({
+    const ret = await new QuestionBankDAO().duplicate({
         questionBankId: questionBankId
     });
     if (!ret) {

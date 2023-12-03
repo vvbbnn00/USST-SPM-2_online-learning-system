@@ -2,7 +2,7 @@ import {db} from "@/dao/connection";
 import {generateUpdateFields} from "@/utils/db";
 
 export default class QuestionBankDAO {
-    static async count({kw = null, status = null}) {
+    async count({kw = null, status = null}) {
         const search = [];
         const params = [];
         if (status === "全部" || status === "undefined") {
@@ -26,7 +26,7 @@ export default class QuestionBankDAO {
         return rows[0].total;
     }
 
-    static async query({question_bank_id}) {
+    async query({question_bank_id}) {
         const sql = `
             SELECT question_bank_id, title, description, status, percentage
             FROM question_bank
@@ -37,7 +37,7 @@ export default class QuestionBankDAO {
         return rows[0];
     }
 
-    static async queryMany({kw = null, status = null, page = 1, pageSize = 10}) {
+    async queryMany({kw = null, status = null, page = 1, pageSize = 10}) {
         if (status === "全部") {
             status = null;
         }
@@ -66,7 +66,7 @@ export default class QuestionBankDAO {
     }
 
 
-    static async remove({questionBankId}) {
+    async remove({questionBankId}) {
 
         if (!questionBankId) {
             return null;
@@ -82,7 +82,7 @@ export default class QuestionBankDAO {
         return rows?.affectedRows === 1;
     }
 
-    static async insert({title, description, status, percentage}) {
+    async insert({title, description, status, percentage}) {
         const totalPercentageSQL = `
             SELECT SUM(percentage) as total_percentage
             FROM question_bank;
@@ -103,7 +103,7 @@ export default class QuestionBankDAO {
         return rows.insertId;
     }
 
-    static async update({questionBankId, title, description, status, percentage}) {
+    async update({questionBankId, title, description, status, percentage}) {
         const [updateFields, params] = generateUpdateFields({
             title, description, status, percentage
         });

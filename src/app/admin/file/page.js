@@ -11,7 +11,7 @@ import SearchBar from "@/components/icons/SearchBar";
 import FileDAO from "@/dao/file";
 import FileList from "./FileList";
 
-export default async function Login({searchParams}) {
+export default async function FileList({searchParams}) {
     let {error} = searchParams;
     const s = await session();
     if (await s.get("user_id")) {
