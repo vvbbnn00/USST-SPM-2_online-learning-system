@@ -2,12 +2,12 @@ import {Input, Textarea} from "@nextui-org/react";
 import React from "react";
 
 export default function TextEdit({questionOption, onOptionChange}) {
-    const [answer, setAnswer] = React.useState(questionOption?.answer);
+    const [answer, setAnswer] = React.useState(questionOption?.answer || "");
 
     React.useEffect(() => {
         onOptionChange({
             answer: answer,
-            option: null,
+            options: null,
             type: "text"
         })
     }, [answer]);

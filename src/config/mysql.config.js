@@ -5,5 +5,5 @@ export const MysqlConfig = {
     database: process.env.MYSQL_DATABASE || 'online_learning',
     waitForConnections: true,
     connectionLimit: 100,
-    queueLimit: 0
+    queueLimit: 10
 }

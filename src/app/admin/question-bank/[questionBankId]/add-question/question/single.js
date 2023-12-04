@@ -2,7 +2,12 @@ import {Radio, RadioGroup} from "@nextui-org/react";
 import React from "react";
 
 export default function SingleQuestion({options, answer, onAnswerChange}) {
-    const [singleChoice, setSingleChoice] = React.useState(answer + 1 || null);
+    answer = parseInt(answer);
+    if (isNaN(answer)) {
+        answer = null;
+    }
+
+    const [singleChoice, setSingleChoice] = React.useState(answer);
     const [selectionList, setSelectionList] = React.useState(options.map((item, index) => ({
         label: index,
         value: index,

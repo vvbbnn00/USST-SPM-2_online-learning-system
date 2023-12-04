@@ -11,7 +11,7 @@ import SearchBar from "@/components/icons/SearchBar";
 import FileDAO from "@/dao/file";
 import FileList from "./FileList";
 
-export default async function FileList({searchParams}) {
+export default async function FileListPage({searchParams}) {
     let {error} = searchParams;
     const s = await session();
     if (await s.get("user_id")) {
@@ -29,7 +29,7 @@ export default async function FileList({searchParams}) {
         return `${size.toFixed(2)} ${units[unitIndex]}`;
     }
 
-    const fileDataArray = await FileDAO.queryById({file_id: 1});
+    const fileDataArray = [] // await FileDAO.queryById({file_id: 1});
     let fileDataList = [];
     const fileCount = fileDataArray.length;
     const fileCountText = `共${fileCount}个文件`;

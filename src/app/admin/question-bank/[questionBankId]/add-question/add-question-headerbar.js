@@ -3,62 +3,36 @@ import {Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Link} fro
 import React from "react";
 
 
-export default function QuestionHeaderBar({questionBankDetail}) {
-
-    const [questionType, setQuestionType] = React.useState();
-
+export default function QuestionHeaderBar({questionBankDetail, onCreateQuestion}) {
     return (
-        <div className={"flex justify-center w-full p-10 pt-1 pb-0"}>
+        <div className={"flex justify-center w-full"}>
             <div className={"w-full"}>
-                <div className={"pt-5 pb-5"}>
+                <div>
 
-                    <div className={"flex bg-white p-5 rounded-xl shadow-xl"}>
-                        <div className={"flex"}>
+                    <div className={"flex backdrop-blur bg-white bg-opacity-70 p-5 shadow-xl"}>
+                        <div className={"w-1/5"}>
                             <Button
                                 as={Link}
                                 href={`/admin/question-bank/${questionBankDetail.question_bank_id}/edit`}
                                 variant={"faded"}
                             >
-                                &lt; 返回编辑
+                                &lt; 返回
                             </Button>
                         </div>
 
-                        <div className={"flex flex-1 justify-center p-1.5"}>
+                        <div className={"justify-center p-1.5 w-3/5 flex"}>
                             <div className={"flex gap-2.5 items-center ml-14"}>
                                 <span className={"text-gray-950 font-bold text-xl"}>题目详情&修改 - {questionBankDetail.title}</span>
                             </div>
                         </div>
 
-                        <div className={"flex"}>
-                            <Dropdown>
-                                <DropdownTrigger>
-                                    <Button
-
-                                    >
-                                        + 新建题目
-                                    </Button>
-                                </DropdownTrigger>
-                                <DropdownMenu
-                                    aria-label="QuestionBank-Question"
-                                    variant="flat"
-                                    selectionMode="single"
-                                    disallowEmptySelection
-                                    onSelectionChange={setQuestionType}
-                                >
-                                    <DropdownItem key="单选题" value="单选题">
-                                        单选题
-                                    </DropdownItem>
-                                    <DropdownItem key="多选题" value="多选题">
-                                        多选题
-                                    </DropdownItem>
-                                    <DropdownItem key="填空题" value="填空题">
-                                        填空题
-                                    </DropdownItem>
-                                    <DropdownItem key="问答题" value="问答题">
-                                        问答题
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </Dropdown>
+                        <div className={"w-1/5 flex justify-end"}>
+                            <Button
+                                color={"primary"}
+                                onClick={onCreateQuestion}
+                            >
+                                新建题目
+                            </Button>
                         </div>
 
                     </div>

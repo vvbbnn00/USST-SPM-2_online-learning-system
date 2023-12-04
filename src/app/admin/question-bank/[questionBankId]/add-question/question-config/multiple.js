@@ -7,7 +7,7 @@ export default function MultipleEdit({questionOption, onOptionChange}) {
 
     const defaultAnswer = [];
     if (questionOption?.answer) {
-        defaultAnswer.push(...questionOption?.answer.split(",").map(item => (parseInt(item) + 1).toString()))
+        defaultAnswer.push(...questionOption?.answer.split(",").map(item => (parseInt(item)).toString()))
     }
 
     const [multipleChoice, setMultipleChoice] = React.useState(defaultAnswer);
@@ -23,21 +23,10 @@ export default function MultipleEdit({questionOption, onOptionChange}) {
         }
     }
 
-    const [multipleChoiceList, setMultipleChoiceList] = React.useState(defaultSelectionList || [
-        {
-            label: 1,
-            value: 1,
-            input: ""
-        },
-        {
-            label: 2,
-            value: 2,
-            input: ""
-        }
-    ]);
+    const [multipleChoiceList, setMultipleChoiceList] = React.useState(defaultSelectionList || []);
 
     React.useEffect(() => {
-        const answerSet = (new Set(multipleChoice.sort().map(item => (item - 1).toString())));
+        const answerSet = (new Set(multipleChoice.sort().map(item => (item).toString())));
         const answerList = answerSet.size > 0 ? [...answerSet] : [];
         onOptionChange({
             answer: answerList.join(","),
@@ -59,7 +48,7 @@ export default function MultipleEdit({questionOption, onOptionChange}) {
                             name={"question_option"}
                         ></Checkbox>
                         <Input
-                            label={`选项${item.label}`}
+                            label={`选项${parseInt(item.label) + 1}`}
                             className={"mr-2.5"}
                             isRequired
                             size={"sm"}
@@ -102,8 +91,8 @@ export default function MultipleEdit({questionOption, onOptionChange}) {
                 onClick={() => {
                     if (multipleChoiceList.length < MAX_SELECTION) {
                         setMultipleChoiceList([...multipleChoiceList, {
-                            label: multipleChoiceList.length + 1,
-                            value: multipleChoiceList.length + 1
+                            label: multipleChoiceList.length,
+                            value: multipleChoiceList.length
                         }])
                     }
                 }}

@@ -1,16 +1,27 @@
 import {Checkbox, CheckboxGroup, Radio, RadioGroup} from "@nextui-org/react";
-import React from "react";
+import React, {useEffect} from "react";
 
 export default function MultipleQuestion({options, answer, onAnswerChange}) {
-    const [singleChoice, setSingleChoice] = React.useState(answer.split(",") || null);
+    const [singleChoice, setSingleChoice] = React.useState();
     const [selectionList, setSelectionList] = React.useState(options.map((item, index) => ({
         label: index,
         value: index,
         input: item
     })));
 
+    useEffect(() => {
+        if (answer) {
+            const answerSet = (new Set(answer.split(",")
+                .map(item => parseInt(item))
+                .filter(item => !isNaN(item))
+                .sort()));
+            setSingleChoice([...answerSet])
+        }
+    }, []);
+
     return <>
         <CheckboxGroup
+            value={singleChoice}
             onValueChange={setSingleChoice}
         >
             {selectionList.map((item, index) => (

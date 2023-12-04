@@ -4,31 +4,23 @@ import React from "react";
 
 export default function SingleEdit({questionOption, onOptionChange}) {
     const MAX_SELECTION = 10;
-    const [singleChoice, setSingleChoice] = React.useState(questionOption?.answer + 1 || 1);
+    const answer = questionOption?.answer ? (parseInt(questionOption?.answer) + 1) : 0;
+    const [singleChoice, setSingleChoice] = React.useState(answer || 0);
 
     const defaultSelectionList = [];
     if (questionOption?.options) {
+        let cnt = 1;
         for (let key in questionOption?.options) {
             defaultSelectionList.push({
-                label: key,
-                value: key,
+                label: cnt,
+                value: cnt,
                 input: questionOption?.options[key]
-            })
+            });
+            cnt++;
         }
     }
 
-    const [selectionList, setSelectionList] = React.useState(defaultSelectionList || [
-        {
-            label: 1,
-            value: 1,
-            input: ""
-        },
-        {
-            label: 2,
-            value: 2,
-            input: ""
-        }
-    ]);
+    const [selectionList, setSelectionList] = React.useState(defaultSelectionList || []);
 
     React.useEffect(() => {
         onOptionChange({
