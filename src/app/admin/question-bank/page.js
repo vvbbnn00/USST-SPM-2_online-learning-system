@@ -3,8 +3,14 @@ import React from "react";
 import QuestionBankSearchbar from "@/app/admin/question-bank/question-bank-searchbar";
 import QuestionBankTable from "@/app/admin/question-bank/question-bank-table";
 import {getQuestionBankTotal, searchQuestionBankList} from "@/service/question-bank";
+import {isTeacher} from "@/utils/auth";
+import {notFound} from "next/navigation";
 
 export default async function Questions({searchParams}) {
+    if (!await isTeacher()) {
+        return notFound();
+    }
+
     let {page, kw, status} = searchParams
     page = Number(page) || 1;
     status = status || null;

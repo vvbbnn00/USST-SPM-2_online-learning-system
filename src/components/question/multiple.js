@@ -17,12 +17,16 @@ export default function MultipleQuestion({options, answer, onAnswerChange}) {
                 .sort()));
             setSingleChoice([...answerSet])
         }
-    }, []);
+    }, [answer]);
 
     return <>
         <CheckboxGroup
             value={singleChoice}
-            onValueChange={setSingleChoice}
+            onValueChange={(data)=>{
+                setSingleChoice(data);
+                const answer = data.sort().join(",");
+                onAnswerChange(answer);
+            }}
         >
             {selectionList.map((item, index) => (
                 <div className={"flex"} key={index}>

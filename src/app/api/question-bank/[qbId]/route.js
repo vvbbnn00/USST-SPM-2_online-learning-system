@@ -1,8 +1,17 @@
 import {NextResponse} from "next/server";
 import {deleteQuestionBank} from "@/service/question-bank";
+import {getUserData, isTeacher} from "@/utils/auth";
 
 
 export async function DELETE(request, {params}) {
+    const user = await getUserData();
+    if (!user) return NextResponse.json({
+        code: 401,
+        message: '请先登录'
+    }, {
+        status: 401
+    });
+
 
     const {qbId} = params;
 
@@ -12,6 +21,15 @@ export async function DELETE(request, {params}) {
             message: '参数错误'
         }, {
             status: 400
+        });
+    }
+
+    if (!await isTeacher()) {
+        return NextResponse.json({
+            code: 403,
+            message: '无权限'
+        }, {
+            status: 403
         });
     }
 

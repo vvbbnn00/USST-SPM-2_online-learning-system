@@ -3,8 +3,13 @@ import React from "react";
 import {getFileList} from "@/service/file";
 import FileListSearchbar from "@/app/admin/file/file-list-searchbar";
 import FileListTable from "@/app/admin/file/file-list-table";
+import {isAdmin} from "@/utils/auth";
+import {notFound} from "next/navigation";
 
 export default async function FilesPage({searchParams}) {
+    if (!await isAdmin()) {
+        return notFound();
+    }
     let {page, kw, type} = searchParams
     page = Number(page) || 1;
     type = type || null;

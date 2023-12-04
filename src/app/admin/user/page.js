@@ -3,8 +3,13 @@ import React from "react";
 import {getUserList} from "@/service/user";
 import UserListSearchbar from "@/app/admin/user/user-list-searchbar";
 import UserListTable from "@/app/admin/user/user-list-table";
+import {notFound} from "next/navigation";
+import {isAdmin} from "@/utils/auth";
 
 export default async function UsersPage({searchParams}) {
+    if (!await isAdmin()) {
+        return notFound();
+    }
     let {page, kw, role} = searchParams
     page = Number(page) || 1;
     role = role || null;

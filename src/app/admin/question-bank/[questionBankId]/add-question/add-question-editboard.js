@@ -2,7 +2,7 @@
 import React, {useEffect} from "react";
 import QuestionEditForm
     from "@/app/admin/question-bank/[questionBankId]/add-question/question-config/question-edit-form";
-import Question from "@/app/admin/question-bank/[questionBankId]/add-question/question/question";
+import Question from "@/components/question/question";
 import useSWR from "swr";
 
 

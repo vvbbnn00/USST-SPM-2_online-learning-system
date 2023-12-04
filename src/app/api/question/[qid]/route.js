@@ -1,5 +1,4 @@
 import {NextResponse} from "next/server";
-import {deleteQuestionBank} from "@/service/question-bank";
 import {deleteQuestion, getQuestion} from "@/service/question";
 import {isLogin, isTeacher} from "@/utils/auth";
 

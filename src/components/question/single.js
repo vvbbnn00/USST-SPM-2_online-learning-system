@@ -1,23 +1,29 @@
 import {Radio, RadioGroup} from "@nextui-org/react";
-import React from "react";
+import React, {useEffect} from "react";
 
 export default function SingleQuestion({options, answer, onAnswerChange}) {
-    answer = parseInt(answer);
-    if (isNaN(answer)) {
-        answer = null;
-    }
-
-    const [singleChoice, setSingleChoice] = React.useState(answer);
+    const [singleChoice, setSingleChoice] = React.useState(null);
     const [selectionList, setSelectionList] = React.useState(options.map((item, index) => ({
         label: index,
         value: index,
         input: item
     })));
 
+    useEffect(() => {
+        answer = parseInt(answer);
+        if (isNaN(answer)) {
+            return;
+        }
+        setSingleChoice(answer);
+    }, [answer]);
+
     return <>
         <RadioGroup
             value={singleChoice}
-            onValueChange={setSingleChoice}
+            onValueChange={(data) => {
+                setSingleChoice(data);
+                onAnswerChange(data);
+            }}
         >
             {selectionList.map((item, index) => (
                 <div className={"flex"} key={index}>

@@ -1,8 +1,16 @@
-import {isAdmin} from "@/utils/auth";
+import {getUserData, isAdmin} from "@/utils/auth";
 import {NextResponse} from "next/server";
 import {deleteUser, getUserInfo} from "@/service/user";
 
 export async function DELETE(request, {params}) {
+    const xUser = await getUserData();
+    if (!xUser) return NextResponse.json({
+        code: 401,
+        message: '请先登录'
+    }, {
+        status: 401
+    });
+
     if (!await isAdmin()) {
         return NextResponse.json({
             code: 403,

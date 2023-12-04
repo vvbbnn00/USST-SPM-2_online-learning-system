@@ -100,6 +100,15 @@ export async function updateUserInfo({userId, username, password, role, name, em
         throw new Error('用户不存在');
     }
 
+    LogDAO.addLog({
+        time: new Date(),
+        type: 'updateUserInfo',
+        detail: '更新用户信息, userId: ' + userId,
+        user_id: (await getUserData()).userId
+    }).catch((err) => {
+        console.error("[service/user.js] LogDAO.addLog error: ", err);
+    });
+
     const result = await UserDAO.update({
         user_id: userId,
         username,
@@ -121,6 +130,15 @@ export async function addUser({username, password, role, name, employeeId, avata
     if (user) {
         throw new Error('用户名已存在');
     }
+
+    LogDAO.addLog({
+        time: new Date(),
+        type: 'addUser',
+        detail: '添加用户, username: ' + username,
+        user_id: (await getUserData()).userId
+    }).catch((err) => {
+        console.error("[service/user.js] LogDAO.addLog error: ", err);
+    });
 
     const result = await UserDAO.insert({
         username,
@@ -148,6 +166,15 @@ export async function deleteUser({userId}) {
     if (user.user_id === (await getUserData()).userId) {
         throw new Error('不能删除自己');
     }
+
+    LogDAO.addLog({
+        time: new Date(),
+        type: 'deleteUser',
+        detail: '删除用户, userId: ' + userId,
+        user_id: (await getUserData()).userId
+    }).catch((err) => {
+        console.error("[service/user.js] LogDAO.addLog error: ", err);
+    });
 
     const result = await UserDAO.remove({user_id: userId});
     if (!result) {
