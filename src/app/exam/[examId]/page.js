@@ -36,7 +36,7 @@ export default async function ExamPage({params}) {
                         </div>
 
                         <div className={"justify-center p-1.5 w-3/5 flex"}>
-                            <div className={"flex gap-2.5 items-center ml-14"}>
+                            <div className={"flex gap-2.5 items-center"}>
                                 <span
                                     className={"text-gray-950 font-bold text-xl"}>测试 - {questionBankDetail.title}</span>
                             </div>
