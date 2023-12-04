@@ -44,7 +44,7 @@ export default async function QuestionBankDetail({params}) {
                             </div>
                         </div>
                         <div className={"items-center justify-end"}>
-                            {await isTeacher() &&
+                            {await isTeacher() && (questionBankDetail.status === "未发布") &&
                                 <Button
                                     as={Link}
                                     href={`/admin/question-bank/${questionBankDetail.question_bank_id}/add-question`}
@@ -52,6 +52,17 @@ export default async function QuestionBankDetail({params}) {
                                     startContent={<IconEdit fill={"#737373"}/>}
                                 >
                                     查看&编辑题目
+                                </Button>
+                            }
+                            {
+                                await isTeacher() && (questionBankDetail.status === "已发布") &&
+                                <Button
+                                    as={Link}
+                                    href={``}
+                                    color={"default"}
+                                    startContent={<IconEdit fill={"#737373"}/>}
+                                >
+                                    预览题目
                                 </Button>
                             }
                         </div>

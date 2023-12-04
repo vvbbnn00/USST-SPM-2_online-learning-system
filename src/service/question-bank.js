@@ -68,7 +68,7 @@ export async function deleteQuestionBank({questionBankId}) {
 
 export async function createQuestionBank({title, description, status, percentage}) {
 
-    if (status === '已发布') {
+    if (status !== '未发布') {
         throw new Error('题库状态不正确');
     }
 

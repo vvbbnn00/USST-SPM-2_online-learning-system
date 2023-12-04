@@ -50,6 +50,9 @@ export default function QuestionBankSearchbar() {
                                 <DropdownItem key="未发布" value="未发布">
                                     未发布
                                 </DropdownItem>
+                                <DropdownItem key="已结束" value="已结束">
+                                    已结束
+                                </DropdownItem>
                             </DropdownMenu>
                         </Dropdown>
                     </div>

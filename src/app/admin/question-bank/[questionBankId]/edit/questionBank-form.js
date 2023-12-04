@@ -79,11 +79,14 @@ export default function QuestionBankForm({QuestionBank}) {
                     name={"status"}
                     defaultSelectedKeys={[QuestionBank?.status]}
                 >
+                    <SelectItem value={"未发布"} key={"未发布"}>
+                        {"未发布"}
+                    </SelectItem>
                     <SelectItem value={"已发布"} key={"已发布"}>
                         {"已发布"}
                     </SelectItem>
-                    <SelectItem value={"未发布"} key={"未发布"}>
-                        {"未发布"}
+                    <SelectItem value={"已结束"} key={"已结束"}>
+                        {"已结束"}
                     </SelectItem>
                 </Select>
                 <Textarea

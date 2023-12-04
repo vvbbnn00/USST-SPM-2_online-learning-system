@@ -104,23 +104,20 @@ export default function QuestionBankTable({questionBankList, pages}) {
                 return (
                     <div className={"flex justify-center"}>
                         <div className={"flex text-medium text-gray-500 items-center"}>
-                            {
-                                (item.status === '未发布') &&
-                                <Button
-                                    color={"warning"}
-                                    as={Link}
-                                    size={"md"}
-                                    variant={"flat"}
-                                    isIconOnly
-                                    startContent={<IconEdit size={18}/>}
-                                    aria-label="查看详情与编辑"
-                                    onClick={() => {
-                                        router.push(`/admin/question-bank/${item.question_bank_id}/edit`)
-                                        router.refresh();
-                                    }}
-                                >
-                                </Button>
-                            }
+                            <Button
+                                color={"warning"}
+                                as={Link}
+                                size={"md"}
+                                variant={"flat"}
+                                isIconOnly
+                                startContent={<IconEdit size={18}/>}
+                                aria-label="查看详情与编辑"
+                                onClick={() => {
+                                    router.push(`/admin/question-bank/${item.question_bank_id}/edit`)
+                                    router.refresh();
+                                }}
+                            >
+                            </Button>
 
                             <Button
                                 color={"danger"}
