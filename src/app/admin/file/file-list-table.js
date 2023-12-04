@@ -116,7 +116,7 @@ export default function FileListTable({fileList, pages}) {
                     >
                         {fileList.map((item) => (
                             <TableRow
-                                key={item.question_bank_id}
+                                key={item.fileId}
                             >
                                 {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
                             </TableRow>

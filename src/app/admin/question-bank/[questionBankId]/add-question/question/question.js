@@ -4,7 +4,7 @@ import React from "react";
 import SingleQuestion from "@/app/admin/question-bank/[questionBankId]/add-question/question/single";
 import MultipleQuestion from "@/app/admin/question-bank/[questionBankId]/add-question/question/multiple";
 import TextQuestion from "@/app/admin/question-bank/[questionBankId]/add-question/question/text";
-import {IconDetete} from "@/components/icons/IconDetete";
+import {IconDelete} from "@/components/icons/IconDelete";
 import {Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader} from "@nextui-org/react";
 
 function DeleteConfirm({isOpen, questionId, onDelete, onOpenChange}) {
@@ -81,7 +81,7 @@ export default function Question({questionDetail, onAnswerChange, index = null, 
                         setIsDeleteConfirmOpen(true)
                     }
                 }>
-                    <IconDetete/>
+                    <IconDelete/>
                 </span>
             }
         </div>

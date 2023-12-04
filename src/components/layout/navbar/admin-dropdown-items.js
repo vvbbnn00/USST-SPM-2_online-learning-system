@@ -55,6 +55,13 @@ export function AdminNavBarItem({route}) {
                 >
                     系统管理
                 </DropdownItem>
+                <DropdownItem
+                    key="/admin/log"
+                    description="查看系统日志。"
+                    href="/admin/log"
+                >
+                    日志管理
+                </DropdownItem>
             </DropdownMenu>
         </Dropdown>
     )

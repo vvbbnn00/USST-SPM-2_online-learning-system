@@ -16,7 +16,6 @@ import {IconSearch} from "@/components/icons/IconSearch";
 export default function FileListSearchbar() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [questionBankStatus, setQuestionBankStatus] = React.useState("全部");
     const [kw, setKw] = React.useState("");
 
 
