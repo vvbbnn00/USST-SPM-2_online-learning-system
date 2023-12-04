@@ -2,7 +2,7 @@
 import React, {useEffect} from "react";
 import {Button, Input, Select, SelectItem, Textarea} from "@nextui-org/react";
 import {useFormState, useFormStatus} from "react-dom";
-import {formCreateQuestionBank} from "@/components/layout/content-form/actions";
+import {formCreateQuestionBank} from "@/components/layout/question-bank-form/actions";
 
 const Submit = () => {
     const {pending} = useFormStatus();
