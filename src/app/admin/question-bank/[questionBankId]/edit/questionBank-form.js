@@ -72,23 +72,30 @@ export default function QuestionBankForm({QuestionBank}) {
                     name={"percentage"}
                     defaultValue={QuestionBank?.percentage}
                 />
-                <Select
-                    label="发布状态"
-                    size={"lg"}
-                    isRequired
-                    name={"status"}
-                    defaultSelectedKeys={[QuestionBank?.status]}
-                >
-                    <SelectItem value={"未发布"} key={"未发布"}>
-                        {"未发布"}
-                    </SelectItem>
-                    <SelectItem value={"已发布"} key={"已发布"}>
-                        {"已发布"}
-                    </SelectItem>
-                    <SelectItem value={"已结束"} key={"已结束"}>
-                        {"已结束"}
-                    </SelectItem>
-                </Select>
+                {
+                    (!QuestionBank?.status) &&
+                    <input name={"status"} type={"hidden"} value={"未发布"}/>
+                }
+                {
+                    (QuestionBank?.status) &&
+                    <Select
+                        label="发布状态"
+                        size={"lg"}
+                        isRequired
+                        name={"status"}
+                        defaultSelectedKeys={[QuestionBank?.status]}
+                    >
+                        <SelectItem value={"未发布"} key={"未发布"}>
+                            {"未发布"}
+                        </SelectItem>
+                        <SelectItem value={"已发布"} key={"已发布"}>
+                            {"已发布"}
+                        </SelectItem>
+                        <SelectItem value={"已结束"} key={"已结束"}>
+                            {"已结束"}
+                        </SelectItem>
+                    </Select>
+                }
                 <Textarea
                     label="题库描述"
                     placeholder="请输入题库描述"

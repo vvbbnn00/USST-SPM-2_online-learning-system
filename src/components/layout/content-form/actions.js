@@ -18,7 +18,7 @@ const questionBankSchema = z.object({
     questionBankId: z.number().min(1).nullable(),
     title: z.string().min(1).max(255),
     description: z.string().min(1).max(255),
-    status: z.enum(["已发布", "未发布"]),
+    status: z.enum(["已发布", "未发布", "已结束"]),
     percentage: z.number().min(0).max(100),
 })
 

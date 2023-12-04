@@ -62,6 +62,10 @@ export default function QuestionBankTable({questionBankList, pages}) {
                 return <Chip color="warning" variant={"flat"}>
                     未发布
                 </Chip>
+            case "已结束":
+                return <Chip color="danger" variant={"flat"}>
+                    已结束
+                </Chip>
             default:
                 return <></>
         }

@@ -55,7 +55,7 @@ export default async function QuestionBankDetail({params}) {
                                 </Button>
                             }
                             {
-                                await isTeacher() && (questionBankDetail.status === "已发布") &&
+                                await isTeacher() && (questionBankDetail.status === "已发布" || questionBankDetail.status === "已结束" ) &&
                                 <Button
                                     as={Link}
                                     href={``}

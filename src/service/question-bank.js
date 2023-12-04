@@ -98,6 +98,24 @@ export async function createQuestionBank({title, description, status, percentage
 }
 
 export async function updateQuestionBank({questionBankId, title, description, status, percentage}) {
+
+    const question_bank = await getQuestionBank({question_bank_id: questionBankId});
+
+    switch (question_bank.status) {
+        case '未发布':
+            if (status === '未发布') {
+                throw new Error('题库状态不正确');
+            }
+            break;
+        case '已发布':
+            if (status === '未发布') {
+                throw new Error('题库状态不正确');
+            }
+            break;
+        case '已结束':
+            throw new Error('题库已结束，不可修改');
+    }
+
     const userData = await getUserData();
 
     LogDAO.addLog({
