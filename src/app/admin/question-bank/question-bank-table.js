@@ -15,6 +15,8 @@ import {
 } from "@nextui-org/react";
 import {IconDelete} from "@/components/icons/IconDelete";
 import {IconEdit} from "@/components/icons/IconEdit";
+import {IconSearch} from "@/components/icons/IconSearch";
+import {IconEditQuestion} from "@/components/icons/IconEditQuestion";
 
 export default function QuestionBankTable({questionBankList, pages}) {
     const searchParams = useSearchParams();
@@ -137,6 +139,37 @@ export default function QuestionBankTable({questionBankList, pages}) {
                             >
                             </Button>
 
+                            <Button
+                                color={"success"}
+                                size={"md"}
+                                className={"ml-2"}
+                                variant={"flat"}
+                                isIconOnly
+                                startContent={<IconSearch/>}
+                                aria-label="预览试题"
+                                onClick={() => {
+                                //
+                                }}
+                            >
+                            </Button>
+
+                            {
+                                (item.status !== "已结束") &&
+                                <Button
+                                    color={"secondary"}
+                                    size={"md"}
+                                    className={"ml-2"}
+                                    variant={"flat"}
+                                    isIconOnly
+                                    startContent={<IconEditQuestion/>}
+                                    aria-label="编辑试题"
+                                    onClick={() => {
+                                        router.push(`/admin/question-bank/${item.question_bank_id}/add-question`)
+                                        router.refresh();
+                                    }}
+                                >
+                                </Button>
+                            }
                         </div>
                     </div>
                 );
