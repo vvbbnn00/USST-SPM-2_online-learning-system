@@ -1,5 +1,4 @@
 import {db} from "@/dao/connection";
-import LogDAO from "@/dao/log";
 import {generateUpdateFields} from "@/utils/db";
 
 export default class FileDAO {
@@ -14,8 +13,13 @@ export default class FileDAO {
             SELECT file_id, filename, type, size, storage_id, status, created_at, created_by FROM file WHERE file_id = ?;
         `;
         const params = [file_id];
-        const [rows] = await db.execute(sql, params);
-        return rows[0];
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows[0];
+        } finally {
+            await db.releaseConnection(conn);
+        }
     }
 
     /**
@@ -32,8 +36,13 @@ export default class FileDAO {
             INSERT INTO file(filename, type, size, storage_id, created_by) VALUES(?, ?, ?, ?, ?);
         `;
         const params = [filename, type, size, storage_id, created_by];
-        const [rows] = await db.execute(sql, params);
-        return rows.insertId;
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows.insertId;
+        } finally {
+            await db.releaseConnection(conn);
+        }
     }
 
 
@@ -64,8 +73,13 @@ export default class FileDAO {
         const sql = `
             UPDATE file SET ${updateFields.join(', ')} WHERE file_id = ?;
         `;
-        const [rows] = await db.execute(sql, params);
-        return rows.affectedRows > 0;
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows.affectedRows > 0;
+        } finally {
+            await db.releaseConnection(conn);
+        }
     }
 
     /**
@@ -78,7 +92,82 @@ export default class FileDAO {
             DELETE FROM file WHERE file_id = ?;
         `;
         const params = [file_id];
-        const [rows] = await db.execute(sql, params);
-        return rows.affectedRows > 0;
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows.affectedRows > 0;
+        } finally {
+            await db.releaseConnection(conn);
+        }
+    }
+
+    /**
+     * 获取文件列表
+     * @param kw 关键词
+     * @param type 文件类型
+     * @param page 页码
+     * @param pageSize 分页大小
+     */
+    static async queryMany({kw = null, type = null, page = 1, pageSize = 10}) {
+        const search = [];
+        const params = [];
+        if (kw) {
+            search.push('filename LIKE ? ');
+            params.push([`%${kw}%`]);
+        }
+        if (type) {
+            search.push('type = ?');
+            params.push(type);
+        }
+
+        search.push("status = 'uploaded'")
+
+        const sql = `
+            SELECT file_id, filename, type, size, storage_id, status, created_at, created_by
+            FROM file
+            WHERE true ${search.length > 0 ? 'AND ' + search.join(' AND ') : ''}
+            LIMIT ?, ?;
+        `
+        params.push((page - 1) * pageSize);
+        params.push(pageSize);
+
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows;
+        } finally {
+            await db.releaseConnection(conn);
+        }
+    }
+
+    /**
+     * 获取文件总数
+     * @param kw 关键词
+     * @param type 文件类型
+     */
+    static async count({kw = null, type = null}) {
+        const search = [];
+        const params = [];
+        if (kw) {
+            search.push('filename LIKE ? ');
+            params.push([`%${kw}%`]);
+        }
+        if (type) {
+            search.push('type = ?');
+            params.push(type);
+        }
+
+        const sql = `
+            SELECT COUNT(*) as total
+            FROM file
+            WHERE true ${search.length > 0 ? 'AND ' + search.join(' AND ') : ''}
+        `
+        const conn = await db.getConnection()
+        try {
+            const [rows] = await conn.query(sql, params);
+            return rows[0].total;
+        } finally {
+            await db.releaseConnection(conn);
+        }
     }
 }

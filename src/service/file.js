@@ -75,3 +75,36 @@ export async function insertFile({fileName, fileType, fileSize}) {
         created_by: user.userId
     });
 }
+
+
+export async function getFileList({page = 1, pageSize = 10, type = null, kw = null}) {
+    const result = await FileDAO.queryMany({
+        kw,
+        type,
+        page,
+        pageSize
+    })
+    const count = await FileDAO.count({
+        kw,
+        type,
+    })
+
+    const fileList = [];
+    for (let file of result) {
+        fileList.push({
+            fileId: file.file_id,
+            fileName: file.filename,
+            fileType: file.type,
+            fileSize: file.size,
+            fileStorageId: file.storage_id,
+            fileStatus: file.status,
+            fileCreateTime: file.created_at,
+            fileCreateBy: file.created_by,
+        })
+    }
+
+    return {
+        fileList,
+        count
+    }
+}
