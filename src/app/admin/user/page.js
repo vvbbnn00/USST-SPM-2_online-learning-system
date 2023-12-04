@@ -1,28 +1,27 @@
 import NavBarComp from "@/components/layout/navbar";
 import React from "react";
-import {getLogList} from "@/service/log";
-import LogListTable from "@/app/admin/log/log-list-table";
-import LogListSearchBar from "@/app/admin/log/log-list-searchbar";
+import {getUserList} from "@/service/user";
+import UserListSearchbar from "@/app/admin/user/user-list-searchbar";
+import UserListTable from "@/app/admin/user/user-list-table";
 
-export default async function LogsPage({searchParams}) {
-    let {page, kw, type} = searchParams
+export default async function UsersPage({searchParams}) {
+    let {page, kw, role} = searchParams
     page = Number(page) || 1;
-    type = type || null;
+    role = role || null;
 
     const pagesDefault = {
         page: page,
         pageSize: 15,
     }
-    const logData = await getLogList({
+    const userData = await getUserList({
         kw: kw,
-        type: type,
-        userId: null,
+        role: role,
         page: pagesDefault.page,
         pageSize: pagesDefault.pageSize
     });
 
-    const total = logData.count;
-    const logList = logData.logList;
+    const total = userData.count;
+    const userList = userData.userList;
 
     const pages = {
         totalPages: Math.ceil(total / pagesDefault.pageSize) || 1,
@@ -31,17 +30,17 @@ export default async function LogsPage({searchParams}) {
 
     return (
         <>
-            <NavBarComp route={"/admin/log"}/>
+            <NavBarComp route={"/admin/user"}/>
             <div className={""}>
                 <div className={"flex justify-center"}>
                     <div className={"w-[1024px] p-5 mt-5"}>
                         <div className={"flex flex-row w-full bg-white rounded-lg shadow-xl p-7"}>
-                            <LogListSearchBar/>
+                            <UserListSearchbar/>
                         </div>
                     </div>
                 </div>
                 <div className={"w-full"}>
-                    <LogListTable fileList={logList} pages={pages}/>
+                    <UserListTable fileList={userList} pages={pages}/>
                 </div>
             </div>
         </>

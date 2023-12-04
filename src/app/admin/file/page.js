@@ -4,7 +4,7 @@ import {getFileList} from "@/service/file";
 import FileListSearchbar from "@/app/admin/file/file-list-searchbar";
 import FileListTable from "@/app/admin/file/file-list-table";
 
-export default async function Questions({searchParams}) {
+export default async function FilesPage({searchParams}) {
     let {page, kw, type} = searchParams
     page = Number(page) || 1;
     type = type || null;

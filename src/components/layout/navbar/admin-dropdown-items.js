@@ -30,6 +30,7 @@ export function AdminNavBarItem({route}) {
             >
                 <DropdownItem
                     key="/admin/user"
+                    href="/admin/user"
                     description="对课程用户进行管理。"
                 >
                     用户管理

@@ -108,7 +108,7 @@ export default function QuestionBankTable({questionBankList, pages}) {
                 );
             case "operation":
                 return (
-                    <div className={"flex justify-center"}>
+                    <div className={"flex justify-start"}>
                         <div className={"flex text-medium text-gray-500 items-center"}>
                             <Button
                                 color={"warning"}

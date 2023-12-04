@@ -1,7 +1,6 @@
 import {db} from "@/dao/connection";
 import {generateUpdateFields} from "@/utils/db";
 import {doBcrypt} from "@/utils/security";
-import {ServerInsertedHTMLContext} from "next/navigation";
 
 export default class UserDAO {
     static async query({user_id = null, username = null, withPassword = false}) {
@@ -30,7 +29,7 @@ export default class UserDAO {
         const params = [];
         if (kw) {
             search.push('username LIKE ? OR name LIKE ? OR employee_id LIKE ?');
-            params.push([`%${kw}%`, `%${kw}%`, `%${kw}%`]);
+            params.push(`%${kw}%`, `%${kw}%`, `%${kw}%`);
         }
         if (role) {
             search.push('role = ?');
@@ -56,7 +55,7 @@ export default class UserDAO {
         const params = [];
         if (kw) {
             search.push('username LIKE ? OR name LIKE ? OR employee_id LIKE ?');
-            params.push([`%${kw}%`, `%${kw}%`, `%${kw}%`]);
+            params.push(`%${kw}%`, `%${kw}%`, `%${kw}%`);
         }
         if (role) {
             search.push('role = ?');
@@ -106,7 +105,6 @@ export default class UserDAO {
             if (user && user.user_id !== user_id) {
                 throw new Error('用户名已存在');
             }
-
         }
         const [updateField, params] = generateUpdateFields({username, name, employee_id, role, avatar});
         if (password) {
