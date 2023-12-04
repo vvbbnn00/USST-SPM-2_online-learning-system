@@ -8,6 +8,7 @@ import NavBarComp from "@/components/layout/navbar";
 import {Button, Link} from "@nextui-org/react";
 import {IconEdit} from "@/components/icons/IconEdit";
 import React from "react";
+import {IconEditQuestion} from "@/components/icons/IconEditQuestion";
 
 export default async function QuestionBankDetail({params}) {
     if (!await isTeacher()) {
@@ -39,7 +40,7 @@ export default async function QuestionBankDetail({params}) {
                         </div>
 
                         <div className={"flex flex-1 justify-center p-1.5"}>
-                            <div className={"flex gap-2.5 items-center ml-14"}>
+                            <div className={"flex gap-2.5 items-center"}>
                                 <span className={"text-gray-950 font-bold text-xl"}>编辑 - {questionBankDetail.title}</span>
                             </div>
                         </div>
@@ -58,11 +59,11 @@ export default async function QuestionBankDetail({params}) {
                                 await isTeacher() && (questionBankDetail.status === "已发布" || questionBankDetail.status === "已结束" ) &&
                                 <Button
                                     as={Link}
-                                    href={``}
+                                    href={`/exam/${questionBankDetail.question_bank_id}?from=qb`}
                                     color={"default"}
-                                    startContent={<IconEdit fill={"#737373"}/>}
+                                    startContent={<IconEditQuestion fill={"#737373"}/>}
                                 >
-                                    预览题目
+                                    预览试题
                                 </Button>
                             }
                         </div>

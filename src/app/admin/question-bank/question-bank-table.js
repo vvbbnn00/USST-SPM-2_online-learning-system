@@ -147,9 +147,8 @@ export default function QuestionBankTable({questionBankList, pages}) {
                                 isIconOnly
                                 startContent={<IconSearch/>}
                                 aria-label="预览试题"
-                                onClick={() => {
-                                //
-                                }}
+                                as={Link}
+                                href={`/exam/${item.question_bank_id}?from=qb`}
                             >
                             </Button>
 

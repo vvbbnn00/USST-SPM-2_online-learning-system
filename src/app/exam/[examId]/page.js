@@ -5,12 +5,13 @@ import {notFound, redirect} from "next/navigation";
 import ExamBody from "@/app/exam/[examId]/exam-body";
 import {isLogin, isTeacher} from "@/utils/auth";
 
-export default async function ExamPage({params}) {
+export default async function ExamPage({params, searchParams}) {
     if (!await isLogin()) {
         return redirect("/login");
     }
 
     const {examId} = params;
+    const {from} = searchParams;
 
     const questionBankDetail = await getQuestionBank({question_bank_id: examId});
     if (questionBankDetail == null) {
@@ -28,7 +29,7 @@ export default async function ExamPage({params}) {
                         <div className={"w-1/5"}>
                             <Button
                                 as={Link}
-                                href={`/exam`}
+                                href={from === "qb" ? "/admin/question-bank" : "/exam"}
                                 variant={"faded"}
                             >
                                 &lt; 返回
