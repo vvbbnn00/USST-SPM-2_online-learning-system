@@ -74,10 +74,10 @@ export default function QuestionBankForm({QuestionBank}) {
                 />
                 <Select
                     label="发布状态"
-                    placeholder="设置题库的发布状态"
                     size={"lg"}
                     isRequired
                     name={"status"}
+                    defaultSelectedKeys={[QuestionBank?.status]}
                 >
                     <SelectItem value={"已发布"} key={"已发布"}>
                         {"已发布"}

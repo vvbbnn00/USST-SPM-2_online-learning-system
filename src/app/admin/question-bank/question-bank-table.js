@@ -13,6 +13,7 @@ import {
     TableHeader,
     TableRow, useDisclosure,
 } from "@nextui-org/react";
+import {IconDelete} from "@/components/icons/IconDelete";
 import {IconEdit} from "@/components/icons/IconEdit";
 
 export default function QuestionBankTable({questionBankList, pages}) {
@@ -102,30 +103,37 @@ export default function QuestionBankTable({questionBankList, pages}) {
             case "operation":
                 return (
                     <div className={"flex justify-center"}>
-                        <div className={"text-medium text-gray-500"}>
-                            <Button
-                                color={"warning"}
-                                as={Link}
-                                size={"md"}
-                                variant={"flat"}
-                                onClick={() => {
-                                    router.push(`/admin/question-bank/${item.question_bank_id}/edit`)
-                                    router.refresh();
-                                }}
-                            >
-                                查看详情 & 编辑
-                            </Button>
+                        <div className={"flex text-medium text-gray-500 items-center"}>
+                            {
+                                (item.status === '未发布') &&
+                                <Button
+                                    color={"warning"}
+                                    as={Link}
+                                    size={"md"}
+                                    variant={"flat"}
+                                    isIconOnly
+                                    startContent={<IconEdit size={18}/>}
+                                    aria-label="查看详情与编辑"
+                                    onClick={() => {
+                                        router.push(`/admin/question-bank/${item.question_bank_id}/edit`)
+                                        router.refresh();
+                                    }}
+                                >
+                                </Button>
+                            }
 
                             <Button
                                 color={"danger"}
                                 size={"md"}
                                 className={"ml-2"}
                                 variant={"flat"}
+                                isIconOnly
+                                startContent={<IconDelete/>}
+                                aria-label="删除"
                                 onClick={() => {
                                     deleteQuestionBank(item.question_bank_id)
                                 }}
                             >
-                                删除
                             </Button>
 
                         </div>

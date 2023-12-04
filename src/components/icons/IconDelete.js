@@ -1,5 +1,5 @@
 import React from "react";
-export const IconDetete = (props) => (
+export const IconDelete = (props) => (
     <svg
         aria-hidden="true"
         fill="none"
