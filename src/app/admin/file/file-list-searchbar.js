@@ -16,7 +16,7 @@ import {IconSearch} from "@/components/icons/IconSearch";
 export default function FileListSearchbar() {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const [kw, setKw] = React.useState("");
+    const [kw, setKw] = React.useState(searchParams.get('kw') || "");
 
 
     return (
