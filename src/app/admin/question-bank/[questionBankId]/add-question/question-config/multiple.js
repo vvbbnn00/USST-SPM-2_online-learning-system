@@ -1,5 +1,5 @@
 "use client"
-import {Button, Checkbox, CheckboxGroup, Input} from "@nextui-org/react";
+import {Button, Checkbox, CheckboxGroup, Input, Textarea} from "@nextui-org/react";
 import React from "react";
 
 export default function MultipleEdit({questionOption, onOptionChange}) {
@@ -47,7 +47,7 @@ export default function MultipleEdit({questionOption, onOptionChange}) {
                             value={item.value}
                             name={"question_option"}
                         ></Checkbox>
-                        <Input
+                        <Textarea
                             label={`选项${parseInt(item.label) + 1}`}
                             className={"mr-2.5"}
                             isRequired

@@ -1,5 +1,5 @@
 "use client";
-import {Button, Input, Radio, RadioGroup} from "@nextui-org/react";
+import {Button, Input, Radio, RadioGroup, Textarea} from "@nextui-org/react";
 import React from "react";
 
 export default function SingleEdit({questionOption, onOptionChange}) {
@@ -42,7 +42,7 @@ export default function SingleEdit({questionOption, onOptionChange}) {
                             value={item.value}
                             name={"question_option"}
                         ></Radio>
-                        <Input
+                        <Textarea
                             label={`选项${item.label}`}
                             className={"mr-2.5"}
                             isRequired
