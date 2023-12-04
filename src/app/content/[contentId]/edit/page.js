@@ -6,6 +6,9 @@ import ContentForm from "@/components/layout/content-form/content-form";
 import {getContentDetail} from "@/service/content";
 import {notFound} from "next/navigation";
 import {isTeacher} from "@/utils/auth";
+import DeleteConfirm from "@/app/content/[contentId]/edit/delete-button";
+
+
 
 export default async function ContentsDetail({searchParams, params}) {
     if (!await isTeacher()) {
@@ -45,6 +48,11 @@ export default async function ContentsDetail({searchParams, params}) {
                             </Tooltip>
                         </div>
 
+                        <div className={"flex"}>
+                            <div className={"flex gap-2.5 items-center justify-end"}>
+                                <DeleteConfirm contentId={contentId}/>
+                            </div>
+                        </div>
                     </div>
 
                     <div className={"flex bg-white p-10 rounded-xl shadow-xl mt-5 flex-col gap-5 w-full"}>

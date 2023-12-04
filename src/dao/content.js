@@ -75,4 +75,18 @@ export default class ContentDAO {
         const [rows] = await db.execute(sql, params);
         return rows.affectedRows > 0;
     }
+
+
+    /**
+     * 删除教学材料
+     * @param content_id
+     */
+    static async delete({content_id}) {
+        const sql = `
+            DELETE FROM content WHERE content_id = ?;
+        `;
+        const params = [content_id];
+        const [rows] = await db.execute(sql, params);
+        return rows.affectedRows > 0;
+    }
 }

@@ -167,3 +167,24 @@ export async function updateContent({contentId, name, chapter, uploadId, permiss
         throw new Error('更新教学材料失败');
     }
 }
+
+
+export async function deleteContent({contentId}) {
+    const userData = await getUserData();
+
+    LogDAO.addLog({
+        time: new Date(),
+        type: 'content',
+        detail: `删除教学材料: ${contentId}`,
+        user_id: userData.userId
+    }).catch((err) => {
+        console.error("[service/content.js] LogDAO.addLog error: ", err);
+    })
+
+    const ret = await ContentDAO.delete({
+        content_id: contentId
+    });
+    if (!ret) {
+        throw new Error('删除教学材料失败');
+    }
+}

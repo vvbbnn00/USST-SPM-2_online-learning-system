@@ -43,7 +43,8 @@ export function AdminNavBarItem({route}) {
                 </DropdownItem>
                 <DropdownItem
                     key="/admin/file"
-                    description="上传、下载、删除文件。"
+                    href="/admin/file"
+                    description="查询和下载文件。"
                 >
                     文件管理
                 </DropdownItem>
@@ -53,6 +54,13 @@ export function AdminNavBarItem({route}) {
                     href="/admin/system"
                 >
                     系统管理
+                </DropdownItem>
+                <DropdownItem
+                    key="/admin/log"
+                    description="查看系统日志。"
+                    href="/admin/log"
+                >
+                    日志管理
                 </DropdownItem>
             </DropdownMenu>
         </Dropdown>
