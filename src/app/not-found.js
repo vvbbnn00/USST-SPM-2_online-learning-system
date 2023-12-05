@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation'
 export default function NotFound() {
     return (<>
         <title>SPM2 - Not Found</title>
-        <NavBarComp route={"/"}/>
+        <NavBarComp route={"/"} />
         {/* https://stackoverflow.com/questions/72673561/tailwind-h-screen-container-is-header-amount-of-height-too-far-off-the-bottom */}
         <div className="p-36 px-72 h-screen">
             <font size={4} color="#000000">
@@ -18,11 +18,14 @@ export default function NotFound() {
                     你所请求的页面并不存在
                 </p>
                 <br />
-                <Button color="default" variant="light">
-                    <font size={4} color="#000000"><Link href="/">返回首页</Link></font>
+                <Button
+                    href={`/`}
+                    variant={"faded"}
+                >
+                    &lt; 返回
                 </Button>
                 <br />
-                <br className="p-20"/>
+                <br className="p-20" />
                 <div>
                     <p>
                         <br />
