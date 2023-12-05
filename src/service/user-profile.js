@@ -31,6 +31,10 @@ export async function updateUserProfile({userId, origin_password, password, avat
         throw new Error('原密码错误或为空');
     }
 
+    if(password === ''){
+        throw new Error('新密码为空');
+    }
+
     const updateResult = await UserProfileDAO.update({user_id: userId, password: password, avatar: avatar});
 
     LogDAO.addLog({
