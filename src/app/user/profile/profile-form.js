@@ -1,5 +1,5 @@
 "use client";
-import {Button, Input, Select, SelectItem, Textarea} from "@nextui-org/react";
+import {Button, Input} from "@nextui-org/react";
 import React, {useEffect} from "react";
 import {useFormState, useFormStatus} from "react-dom";
 import {formUpdateUserProfile} from "@/components/layout/user-profile/actions";
