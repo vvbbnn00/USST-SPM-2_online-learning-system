@@ -7,8 +7,6 @@ export default async function UserProfile() {
 
     const UserData = await getUserData();
 
-    console.log(UserData)
-
     return(
         <>
             <NavBarComp route={"/user/profile"}/>

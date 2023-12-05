@@ -24,6 +24,8 @@ export default function ProfileForm({userdata}) {
 
     const [state, formAction] = useFormState(formUpdateUserProfile, {});
 
+    console.log(userdata);
+
     useEffect(() => {
         if (state?.code === 200) {
             location.href = `/user/profile`;
@@ -83,6 +85,7 @@ export default function ProfileForm({userdata}) {
                     name={"avatar"}
                     minLength={1}
                     maxLength={255}
+                    defaultValue={userdata?.avatar}
                 />
 
                 <div>
