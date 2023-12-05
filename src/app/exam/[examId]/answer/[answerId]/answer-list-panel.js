@@ -12,7 +12,7 @@ export default function AnswerListPanel({questionBankId, answerId}) {
 
     return <>
         {/*Left Panel*/}
-        <div className={"fixed top-20 mt-20 left-5 h-[500px] w-[300px] bg-white shadow-xl rounded-xl"}>
+        <div className={"fixed top-20 mt-20 left-5 h-[500px] w-[300px] bg-white shadow-xl rounded-xl z-50"}>
             <div className={"text-center text-gray-950 font-bold text-xl p-5"}>
                 批改名单
             </div>
