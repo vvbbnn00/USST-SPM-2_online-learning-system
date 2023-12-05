@@ -1,12 +1,7 @@
 import NavBarComp from "@/components/layout/navbar";
-import {Button, Link} from "@nextui-org/react";
-import {getUserData, isTeacher} from "@/utils/auth";
-import {IconEdit} from "@/components/icons/IconEdit";
-import {IconEditQuestion} from "@/components/icons/IconEditQuestion";
-import QuestionBankForm from "@/app/admin/question-bank/[questionBankId]/edit/questionBank-form";
+import {getUserData} from "@/utils/auth";
 import React from "react";
 import ProfileForm from "@/app/user/profile/profile-form";
-
 
 export default async function UserProfile() {
 
