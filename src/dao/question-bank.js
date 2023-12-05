@@ -58,8 +58,13 @@ export default class QuestionBankDAO {
             params.push([`%${kw}%`]);
         }
         if (status) {
-            search.push('status = ?');
-            params.push(status);
+            if (status instanceof Array) {
+                search.push('status IN (?)');
+                params.push(status);
+            } else {
+                search.push('status = ?');
+                params.push(status);
+            }
         }
 
         const sql = `

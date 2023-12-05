@@ -92,6 +92,15 @@ export async function PUT(request, {params}) {
         questionBankId: qbId
     })
 
+    if (answerData.answer.status !== '未上交') {
+        return NextResponse.json({
+            code: 403,
+            message: '无权限'
+        }, {
+            status: 403
+        });
+    }
+
     const requestBody = await request.json();
     const {questionId, answer: answerContent} = requestBody;
 

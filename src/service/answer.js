@@ -40,6 +40,62 @@ export async function getUserExamData({userId, questionBankId}) {
 }
 
 
+export async function updateAnswerStatus({answerId, status}) {
+    const answer = await AnswerDAO.queryAnswerById({
+        answer_id: answerId
+    });
+    if (!answer) {
+        throw new Error('答题记录不存在');
+    }
+
+    const result = await AnswerDAO.updateAnswerStatus({
+        answer_id: answerId,
+        status
+    });
+
+    if (!result) {
+        throw new Error('更新失败');
+    }
+
+    return result;
+}
+
+
+export async function queryAnswerList({userId, questionBankId}) {
+    return (await AnswerDAO.queryAnswer({
+        user_id: userId,
+        question_bank_id: questionBankId
+    })).map(item => {
+        return {
+            answer_id: item.answer_id,
+            user_id: item.user_id,
+            question_bank_id: item.question_bank_id,
+            status: item.status,
+            user: {
+                userId: item.user_id,
+                username: item.username,
+                name: item.name,
+                employeeId: item.employee_id,
+                avatar: item.avatar
+            }
+        }
+    });
+}
+
+
+export async function queryAnswerById({answerId}) {
+    return await AnswerDAO.queryAnswerById({
+        answer_id: answerId
+    });
+}
+
+
+export async function queryAnswerDetailList({answerId}) {
+    return await AnswerDetailDao.queryAnswerDetailList({
+        answer_id: answerId
+    });
+}
+
 export async function updateAnswerDetail({answerId, questionId, answerContent, score, status = "unchecked"}) {
     const answer = await AnswerDAO.queryAnswerById({
         answer_id: answerId
@@ -74,4 +130,42 @@ export async function updateAnswerDetail({answerId, questionId, answerContent, s
         score,
         status
     });
+}
+
+
+export async function teacherUpdateAnswerScore({answerId, questionId, score}) {
+    const answer = await AnswerDAO.queryAnswerById({
+        answer_id: answerId
+    });
+    if (!answer) {
+        throw new Error('答题记录不存在');
+    }
+    const question = await getQuestion({question_id: questionId});
+    if (question?.question_bank_id !== answer.question_bank_id) {
+        throw new Error('参数错误');
+    }
+    const answerDetail = await AnswerDetailDao.queryAnswerDetail({
+        answer_id: answerId,
+        question_id: questionId
+    });
+    const result = await AnswerDetailDao.updateAnswerDetail({
+        answer_id: answerId,
+        question_id: questionId,
+        answer: answerDetail.answer,
+        score,
+        status: 'checked'
+    });
+    if (!result) {
+        throw new Error('更新失败');
+    }
+
+    const answerList = await AnswerDetailDao.queryAnswerDetailList({
+        answer_id: answerId
+    });
+    if (answerList.every((item) => item.status === 'checked')) {
+        await updateAnswerStatus({
+            answerId,
+            status: '已批改'
+        });
+    }
 }

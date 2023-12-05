@@ -3,7 +3,9 @@ import {Button, Link} from "@nextui-org/react";
 import {getQuestionBank} from "@/service/question-bank";
 import {notFound, redirect} from "next/navigation";
 import ExamBody from "@/app/exam/[examId]/exam-body";
-import {isLogin, isTeacher} from "@/utils/auth";
+import {getUserData, isLogin, isStudent, isTeacher} from "@/utils/auth";
+import SubmitButton from "@/app/exam/[examId]/submit-button";
+import {getUserExamData} from "@/service/answer";
 
 export default async function ExamPage({params, searchParams}) {
     if (!await isLogin()) {
@@ -13,12 +15,24 @@ export default async function ExamPage({params, searchParams}) {
     const {examId} = params;
     const {from} = searchParams;
 
-    const questionBankDetail = await getQuestionBank({question_bank_id: examId});
+    const questionBankDetail = await getQuestionBank({question_bank_id: examId})
+
     if (questionBankDetail == null) {
         return notFound();
     }
+
     if (!await isTeacher() && questionBankDetail.status !== '已发布') {
         return notFound();
+    }
+
+    if (await isStudent()) {
+        const examData = await getUserExamData({
+            questionBankId: examId,
+            userId: (await getUserData()).userId
+        });
+        if (examData?.answer?.status !== '未上交') {
+            return notFound();
+        }
     }
 
     return <div>
@@ -43,13 +57,11 @@ export default async function ExamPage({params, searchParams}) {
                             </div>
                         </div>
 
-                        <div className={"w-1/5 flex justify-end"}>
-                            <Button
-                                color={"primary"}
-                            >
-                                交卷
-                            </Button>
-                        </div>
+                        {
+                            await isStudent() && <div className={"w-1/5 flex justify-end"}>
+                                <SubmitButton examId={examId}/>
+                            </div>
+                        }
 
                     </div>
                 </div>
