@@ -1,4 +1,4 @@
-'use client';
+import NavBarComp from "@/components/layout/navbar";
 import Link from 'next/link'
 import React from "react";
 import { Button, ButtonGroup } from "@nextui-org/react";
@@ -9,8 +9,9 @@ import { useRouter } from 'next/navigation'
 export default function NotFound() {
     return (<>
         <title>SPM2 - Not Found</title>
+        <NavBarComp route={"/"}/>
         {/* https://stackoverflow.com/questions/72673561/tailwind-h-screen-container-is-header-amount-of-height-too-far-off-the-bottom */}
-        <div className="p-36 h-screen">
+        <div className="p-36 px-72 h-screen">
             <font size={4} color="#000000">
                 <p style={{ fontSize: "100pt", margin: 0, paddingBottom: "20pt" }}>:(</p>
                 <p style={{ fontSize: "20pt", margin: 0, padding: 0 }}>
