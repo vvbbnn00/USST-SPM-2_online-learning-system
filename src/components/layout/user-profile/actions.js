@@ -23,9 +23,8 @@ export async function formUpdateUserProfile(_, formData) {
             password,
             avatar,
         })
-        console.log(validated)
+        // console.log(validated)
     } catch (error) {
-        console.error(error)
         return {
             code: 400,
             message: "请检查输入的内容，然后重试"
@@ -45,15 +44,12 @@ export async function formUpdateUserProfile(_, formData) {
         return {
             code: 200,
             message: "更新成功",
-            data: {
-                userId,
-            }
         }
     } catch (error) {
-        console.error(error)
+        // console.error(error)
         return {
             code: 500,
-            message: "更新失败"
+            message: error.message
         }
     }
 }

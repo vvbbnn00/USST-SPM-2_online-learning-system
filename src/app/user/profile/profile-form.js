@@ -39,7 +39,7 @@ export default function ProfileForm({userdata}) {
                     <div className={"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"}
                          role="alert">
                         <strong className={"font-bold"}>
-                            {userdata}更新失败:原密码错误
+                            更新失败:
                         </strong>
                         <span className={"block sm:inline"}>{state?.message}</span>
                     </div>
