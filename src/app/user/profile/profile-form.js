@@ -63,7 +63,7 @@ export default function ProfileForm({userdata}) {
                 <Input
                     label={"原密码"}
                     size={"lg"}
-                    type={"text"}
+                    type={"password"}
                     name={"origin_password"}
                     minLength={1}
                     maxLength={255}
@@ -71,7 +71,7 @@ export default function ProfileForm({userdata}) {
                 <Input
                     label={"修改密码"}
                     size={"lg"}
-                    type={"text"}
+                    type={"password"}
                     name={"password"}
                     minLength={1}
                     maxLength={255}

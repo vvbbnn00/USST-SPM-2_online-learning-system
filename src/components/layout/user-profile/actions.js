@@ -1,16 +1,17 @@
 "use server"
 import {z} from "zod";
 import {updateUserProfile} from "@/service/user-profile";
+import {getUserData} from "@/utils/auth";
 
 const userProfileSchema = z.object({
     userId: z.number().min(1).nullable(),
     origin_password: z.string().max(255).nullable(),
     password: z.string().max(255).nullable(),
-    avatar: z.string().max(255).nullable(),
+    avatar: z.string().max(255).url().optional().nullable(),
 })
 
 export async function formUpdateUserProfile(_, formData) {
-    let userId = formData.get('user_id');
+    let userId = (await getUserData()).userId;
     const origin_password = formData.get('origin_password');
     const password = formData.get('password');
     const avatar = formData.get('avatar');
@@ -21,10 +22,10 @@ export async function formUpdateUserProfile(_, formData) {
             userId: userId ? Number(userId) : null,
             origin_password,
             password,
-            avatar,
+            avatar: avatar ? avatar : null,
         })
-        // console.log(validated)
     } catch (error) {
+        console.log(error.message)
         return {
             code: 400,
             message: "请检查输入的内容，然后重试"

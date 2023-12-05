@@ -3,11 +3,11 @@ import {generateUpdateFields} from "@/utils/db";
 import {doBcrypt} from "@/utils/security";
 
 export default class UserProfileDAO {
-    static async update({user_id,password,avatar = null}) {
+    static async update({user_id, password = null, avatar = null}) {
 
         password = doBcrypt(password)
 
-        const [updateFields,params] = generateUpdateFields({password, avatar});
+        const [updateFields, params] = generateUpdateFields({password, avatar});
 
         console.log(updateFields)
 
