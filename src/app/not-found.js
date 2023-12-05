@@ -19,10 +19,10 @@ export default function NotFound() {
                 </p>
                 <br />
                 <Button
-                    href={`/`}
+                    href={"/"}
                     variant={"faded"}
                 >
-                    &lt; 返回
+                    <Link href="/">&lt; 返回</Link>
                 </Button>
                 <br />
                 <br className="p-20" />
