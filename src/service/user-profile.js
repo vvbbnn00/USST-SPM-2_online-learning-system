@@ -6,6 +6,8 @@ import LogDAO from "@/dao/log";
 
 export async function updateUserProfile({userId, origin_password, password, avatar}) {
 
+    password = password.trim();
+
     const userData = await UserDAO.query({user_id: userId, withPassword: true});
 
     if (origin_password === '' && password === '') {
@@ -31,7 +33,7 @@ export async function updateUserProfile({userId, origin_password, password, avat
         throw new Error('原密码错误或为空');
     }
 
-    if(password === ''){
+    if(passwordPass && password === ''){
         throw new Error('新密码为空');
     }
 
