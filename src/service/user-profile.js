@@ -13,7 +13,7 @@ export async function updateUserProfile({userId, origin_password, password, avat
     if (origin_password === '' && password === '') {
         const updateResult = await UserProfileDAO.update({
             user_id: userId,
-            password: userData.password,
+            password: password,
             avatar: avatar
         });
         LogDAO.addLog({
