@@ -11,19 +11,8 @@ import {
     TableRow,
     useDisclosure,
 } from "@nextui-org/react";
-import {} from "@/service/grade";
 
 export default function GradeList({gradeList, examList}) {
-    const router = useRouter();
-    const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
-    const [selectedUserId, setSelectedUserId] = useState(null);
-    const deleteUser = (userId) => {
-        setSelectedUserId(userId);
-        onOpen();
-    };
-
-    const [isLoading, setIsLoading] = useState(false);
 
     const columns = [
         {

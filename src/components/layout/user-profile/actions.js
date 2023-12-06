@@ -7,7 +7,7 @@ const userProfileSchema = z.object({
     userId: z.number().min(1).nullable(),
     origin_password: z.string().max(255).nullable(),
     password: z.string().max(255).nullable(),
-    avatar: z.string().max(255).url().optional().nullable(),
+    avatar: z.string().max(255).nullable(),
 })
 
 export async function formUpdateUserProfile(_, formData) {
