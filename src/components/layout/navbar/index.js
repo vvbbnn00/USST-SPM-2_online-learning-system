@@ -46,7 +46,7 @@ export default async function NavBarComp({route}) {
                         <NavbarItem isActive={
                             currentRoute === "/grade"
                         }>
-                            <Link color="foreground" href="#">
+                            <Link color="foreground" href="/grade">
                                 成绩
                             </Link>
                         </NavbarItem>

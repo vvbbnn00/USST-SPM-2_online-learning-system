@@ -43,7 +43,7 @@ export async function updateFileStatus({fileId, storageId}) {
     }).catch((err) => {
         console.error("[service/file.js] LogDAO.addLog error: ", err);
     })
-
+    
     return await FileDAO.update({
         file_id: fileId,
         status: 'uploaded',
@@ -75,6 +75,7 @@ export async function insertFile({fileName, fileType, fileSize}) {
         created_by: user.userId
     });
 }
+// 删除，查询列表，支持分页
 
 
 export async function getFileList({page = 1, pageSize = 10, type = null, kw = null}) {
