@@ -12,7 +12,7 @@ export async function GET(_, {params}) {
         questionBankId: examId
     })
 
-    console.log(answerList)
+    // console.log(answerList)
 
     if (!answerList.length) {
         return NextResponse.json({
