@@ -6,7 +6,8 @@ import {REDIS_HOST, REDIS_PORT} from "@/config/redis";
 export const sessionScore = promisifyStore(new RedisStore({
     client: new Redis({
         host: REDIS_HOST,
-        port: REDIS_PORT
+        port: REDIS_PORT,
+        connectTimeout: 1000,
     }),
     prefix: 'online-learning:session:'
 }));
@@ -21,7 +22,8 @@ export const session = nextAppSession({
 export const cacheStore = new Redis({
     host: REDIS_HOST,
     port: REDIS_PORT,
-    keyPrefix: 'online-learning:cache:'
+    keyPrefix: 'online-learning:cache:',
+    connectTimeout: 1000,
 });
 
 export const convertAsync = (task, context) => {

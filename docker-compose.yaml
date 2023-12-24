@@ -9,6 +9,7 @@ services:
       - KK_FILE_UPLOAD_ENABLED=true
       - WATERMARK_TXT=Online Learning System
       - KK_CACHE_ENABLED=true
+
   openresty:
     build: kkfileview-nginx
     ports:
@@ -16,4 +17,19 @@ services:
     volumes:
       - ./logs/openresty:/usr/local/openresty/nginx/logs
     depends_on:
+      - kkfileview
+
+  redis:
+    image: redis:5.0.5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8088:3000"
+    environment:
+      - REDIS_HOST=redis
+    depends_on:
+      - redis
       - kkfileview
