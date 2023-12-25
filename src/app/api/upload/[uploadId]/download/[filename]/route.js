@@ -17,7 +17,7 @@ export async function GET(request, {params}) {
 
     let hasAccess = false;
     // 允许文件预览组件访问
-    if (ip.indexOf("127.0.0.1") !== -1) {
+    if (ip.indexOf("192.168.20.10") !== -1) {
         hasAccess = true;
     } else {
         userData = await getUserData();

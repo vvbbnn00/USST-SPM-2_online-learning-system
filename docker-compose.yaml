@@ -9,6 +9,9 @@ services:
       - KK_FILE_UPLOAD_ENABLED=true
       - WATERMARK_TXT=Online Learning System
       - KK_CACHE_ENABLED=true
+    networks:
+      local:
+        ipv4_address: 192.168.20.10
 
   openresty:
     build: kkfileview-nginx
@@ -18,9 +21,15 @@ services:
       - ./logs/openresty:/usr/local/openresty/nginx/logs
     depends_on:
       - kkfileview
+    networks:
+      local:
+        ipv4_address: 192.168.20.12
 
   redis:
     image: redis:5.0.5
+    networks:
+      local:
+        ipv4_address: 192.168.20.13
 
   web:
     build:
@@ -33,3 +42,12 @@ services:
     depends_on:
       - redis
       - kkfileview
+    networks:
+      local:
+        ipv4_address: 192.168.20.11
+
+networks:
+  local:
+    ipam:
+      config:
+        - subnet: 192.168.20.0/24
